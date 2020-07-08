@@ -8,14 +8,18 @@ type NumberΔ$ = typeof NumberΔ$;
 /**
  * TODO: Add comment
  */
-interface NumberΔ extends Schema<NumberΔ$, number>, CheckableWith<NumberΔ> {}
+type NumberΔ = Schema<NumberΔ$, number> & CheckableWith<NumberΔ>;
 
 const Number = (withChecks?: Check<NumberΔ>[]): NumberΔ => ({
-  type: NumberΔ$,
-  primitive: undefined as any,
-  check: (a) => checkInt (withChecks) (a, ''),
-  checkWith: Number,
-  checkInt: checkInt (withChecks),
+  _: {
+    type: NumberΔ$,
+    primitive: undefined as any,
+    checkInt: checkInt (withChecks),
+  },
+  Δ: {
+    check: (a) => checkInt (withChecks) (a, ''),
+    checkWith: Number
+  }
 });
 
 export default Number ();

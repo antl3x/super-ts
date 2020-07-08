@@ -8,19 +8,25 @@ type UnionΔ$ = typeof UnionΔ$;
 /**
  * TODO: Add comment
  */
-interface UnionΔ<A extends (Schema & Checkable<Schema>)[]>
-  extends Schema<UnionΔ$, UnionPrimitiveΔ$<A>>,
-    Checkable<UnionΔ<A>>,
-    Childable<A> {}
+type UnionΔ<A extends (Schema & Checkable<Schema>)[]> = Schema<
+  UnionΔ$,
+  UnionPrimitiveΔ$<A>
+> &
+  Checkable<UnionΔ<A>> &
+  Childable<A>;
 
 const Union = <A extends (Schema & Checkable<Schema>)[]>(
   ...child: A
 ): UnionΔ<A> => ({
-  type: UnionΔ$,
-  primitive: undefined as any,
-  child,
-  check: (a) => checkInt (child) (a, ''),
-  checkInt: checkInt (child),
+  _: {
+    type: UnionΔ$,
+    primitive: undefined as any,
+    child,
+    checkInt: checkInt (child),
+  },
+  Δ: {
+    check: (a) => checkInt (child) (a, ''),
+  },
 });
 
 type S = Schema;

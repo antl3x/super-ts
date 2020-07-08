@@ -34,7 +34,7 @@ const doChildChecks = (
     Object.keys (child).map ((c) => {
       return a[c] === undefined || a[c] === null
         ? ValidationModule.λ.Success (a)
-        : child[c].checkInt (a[c], buildPath (path, c), child);
+        : child[c]._.checkInt (a[c], buildPath (path, c), child);
     })
   );
 

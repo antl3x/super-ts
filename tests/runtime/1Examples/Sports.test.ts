@@ -48,7 +48,7 @@ it ('Should pass with a valid team', () => {
     type: 'team',
   };
 
-  const isTeam = Team.check (teamPayload);
+  const isTeam = Team.Δ.check (teamPayload);
   expect (isSuccessOf (isTeam, teamPayload)).toBeTruthy ();
 });
 
@@ -60,6 +60,6 @@ it ('Should pass with an invalid team', () => {
     type: 'other',
   };
 
-  const isTeam = Team.check (teamPayload);
+  const isTeam = Team.Δ.check (teamPayload);
   expect (isSuccessOf (isTeam, teamPayload)).toBeFalsy ();
 });

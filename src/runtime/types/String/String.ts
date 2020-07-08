@@ -8,14 +8,18 @@ type StringΔ$ = typeof StringΔ$;
 /**
  * TODO: Add comment
  */
-interface StringΔ extends Schema<StringΔ$, string>, CheckableWith<StringΔ> {}
+type StringΔ = Schema<StringΔ$, string> & CheckableWith<StringΔ>;
 
 const String = (withChecks?: Check<StringΔ>[]): StringΔ => ({
-  type: StringΔ$,
-  primitive: undefined as any,
+  _: {
+    type: StringΔ$,
+    primitive: undefined as any,
+    checkInt: checkInt (withChecks)
+  },
+  Δ: {
   check: (a) => checkInt (withChecks) (a, ''),
-  checkWith: String,
-  checkInt: checkInt (withChecks),
+  checkWith: String
+  }
 });
 
 export default String ();

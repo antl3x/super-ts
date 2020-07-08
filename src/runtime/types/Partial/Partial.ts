@@ -8,19 +8,25 @@ type PartialΔ$ = typeof PartialΔ$;
 /**
  * TODO: Add comment
  */
-interface PartialΔ<A extends { [key: string]: Schema }>
-  extends Schema<PartialΔ$, { [K in keyof A]?: TypeOf<A[K]> }>,
-    Checkable<PartialΔ<A>>,
-    Childable<A> {}
+type PartialΔ<A extends { [key: string]: Schema }> = Schema<
+  PartialΔ$,
+  { [K in keyof A]?: TypeOf<A[K]> }
+> &
+  Checkable<PartialΔ<A>> &
+  Childable<A>;
 
 const Partial = <A extends { [key: string]: Schema }>(
   child: A
 ): PartialΔ<A> => ({
-  type: PartialΔ$,
-  primitive: undefined as any,
-  child,
-  check: (a) => checkInt (a, '', child),
-  checkInt: (a, path) => checkInt (a, path, child),
+  _: {
+    type: PartialΔ$,
+    primitive: undefined as any,
+    child,
+    checkInt: (a, path) => checkInt (a, path, child),
+  },
+  Δ: {
+    check: (a) => checkInt (a, '', child),
+  },
 });
 
 export default Partial;

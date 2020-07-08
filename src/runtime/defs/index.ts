@@ -1,4 +1,4 @@
-import { Validationλ } from "@algebraic/types/Validation/Validation";
+import { Validationλ } from '@algebraic/types/Validation/Validation';
 export {
   Schema,
   TypeOf,
@@ -10,25 +10,37 @@ export {
 };
 
 interface Schema<Type = any, Primitive = any> {
-  type: Type;
-  primitive: Primitive;
+  _: {
+    type: Type;
+    primitive: Primitive;
+  };
 }
 
 interface Childable<Child> {
-  child: Child;
+  _: {
+    child: Child;
+  };
 }
 
-type TypeOf<A extends Schema> = A["primitive"];
+type TypeOf<A extends Schema> = A['_']['primitive'];
 
 interface Checkable<A extends Schema> {
-  check: (a: unknown) => Validationλ<InvalidCheck, TypeOf<A>>;
-  checkInt: Check<A>;
+  _: {
+    checkInt: Check<A>;
+  };
+  Δ: {
+    check: (a: unknown) => Validationλ<InvalidCheck, TypeOf<A>>;
+  };
 }
 
 interface CheckableWith<A extends Schema> {
-  check: (a: unknown) => Validationλ<InvalidCheck, TypeOf<A>>;
-  checkWith: (a: Check<A>[]) => A;
-  checkInt: Check<A>;
+  _: {
+    checkInt: Check<A>;
+  };
+  Δ: {
+    check: (a: unknown) => Validationλ<InvalidCheck, TypeOf<A>>;
+    checkWith: (a: Check<A>[]) => A;
+  };
 }
 
 interface Check<A extends Schema> {

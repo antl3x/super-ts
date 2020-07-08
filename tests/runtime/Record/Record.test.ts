@@ -12,14 +12,14 @@ describe ('Record Type', () => {
     const Person = Record ({
       firstName: String,
     });
-    expect (Person.type).toBe (RecordΔ$);
+    expect (Person._.type).toBe (RecordΔ$);
   });
 
   it ('When Record is checked with incorrect payload, we expected to fail', () => {
     const payload = undefined;
     const isPerson = Record ({
       firstName: String,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
@@ -27,7 +27,7 @@ describe ('Record Type', () => {
     const payload = { firstName: 'Mike' };
     const isPerson = Record ({
       firstName: String,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeTruthy ();
   });
 
@@ -35,41 +35,41 @@ describe ('Record Type', () => {
     const payload = { firstName: true };
     const isPerson = Record ({
       firstName: String,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
   it ('When Record is checked not respecting child custom check, we expected to fail', () => {
     const payload = { firstName: 'Mike' };
     const isPerson = Record ({
-      firstName: String.checkWith ([isStringGt (10)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
   it ('When Record is checked respecting child custom check, we expected to pass', () => {
     const payload = { firstName: 'Mike Pompeo' };
     const isPerson = Record ({
-      firstName: String.checkWith ([isStringGt (10)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeTruthy ();
   });
 
   it ('When Record is checked respecting first child custom check but not the second, we expected to fail', () => {
     const payload = { firstName: 'Mike Pompeo', age: 10 };
     const isPerson = Record ({
-      firstName: String.checkWith ([isStringGt (10)]),
-      age: Number.checkWith ([isNumberGt (18)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+      age: Number.Δ.checkWith ([isNumberGt (18)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
   it ('When Record is checked respecting first child custom check but not the second, we expected to fail', () => {
     const payload = { firstName: 'Mike', age: 20 };
     const isPerson = Record ({
-      firstName: String.checkWith ([isStringGt (10)]),
-      age: Number.checkWith ([isNumberGt (18)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+      age: Number.Δ.checkWith ([isNumberGt (18)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
@@ -77,10 +77,10 @@ describe ('Record Type', () => {
     const payload = { firstName: 'Mike Pompeo', age: 20 };
     const Boss = Record ({ firstName: String });
     const isPerson = Record ({
-      firstName: String.checkWith ([isStringGt (10)]),
-      age: Number.checkWith ([isNumberGt (18)]),
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+      age: Number.Δ.checkWith ([isNumberGt (18)]),
       boss: Boss,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
@@ -92,10 +92,10 @@ describe ('Record Type', () => {
     };
     const Boss = Record ({ firstName: String });
     const isPerson = Record ({
-      firstName: String.checkWith ([isStringGt (10)]),
-      age: Number.checkWith ([isNumberGt (18)]),
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+      age: Number.Δ.checkWith ([isNumberGt (18)]),
       boss: Boss,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeTruthy ();
   });
 
@@ -105,7 +105,7 @@ describe ('Record Type', () => {
       info: Record ({
         name: String,
       }),
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
     expect (isFailure (isPerson) ? isPerson.λ.value[0].path : undefined).toBe ('');
   });
@@ -116,7 +116,7 @@ describe ('Record Type', () => {
       info: Record ({
         name: String,
       }),
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
     expect (isFailure (isPerson) ? isPerson.λ.value[0].path : undefined).toBe (
       'info'
@@ -129,7 +129,7 @@ describe ('Record Type', () => {
       info: Record ({
         name: String,
       }),
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
     expect (isFailure (isPerson) ? isPerson.λ.value[0].path : undefined).toBe (
       'info.name'
@@ -142,7 +142,7 @@ describe ('Record Type', () => {
       info: Record ({
         name: Array (String),
       }),
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
     expect (isFailure (isPerson) ? isPerson.λ.value[0].path : undefined).toBe (
       'info.name'
@@ -155,7 +155,7 @@ describe ('Record Type', () => {
       info: Record ({
         name: Array (String),
       }),
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
     expect (isFailure (isPerson) ? isPerson.λ.value[0].path : undefined).toBe (
       'info.name[2]'

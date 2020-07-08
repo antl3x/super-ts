@@ -16,16 +16,19 @@ type ArrayΔ$ = typeof ArrayΔ$;
 /**
  * TODO: Add comment
  */
-interface ArrayΔ<A extends Schema, IsReadOnly extends boolean = false>
-  extends Schema<
-      ArrayΔ$,
-      IsReadOnly extends true ? readonly TypeOf<A>[] : TypeOf<A>[]
-    >,
-    CheckableWith<ArrayΔ<A, IsReadOnly>>,
-    Childable<A> {
-  isReadOnly?: IsReadOnly;
-  asReadOnly: () => ArrayΔ<A, true>;
-}
+type ArrayΔ<A extends Schema, IsReadOnly extends boolean = false> = Schema<
+  ArrayΔ$,
+  IsReadOnly extends true ? readonly TypeOf<A>[] : TypeOf<A>[]
+> &
+  CheckableWith<ArrayΔ<A, IsReadOnly>> &
+  Childable<A> & {
+    _: {
+      isReadOnly?: IsReadOnly;
+    };
+    Δ: { 
+      asReadOnly: () => ArrayΔ<A, true>;
+    };
+  };
 
 const Array = <
   A extends Schema & Checkable<A>,
@@ -35,18 +38,19 @@ const Array = <
   isReadOnly = false as IsReadOnly,
   withChecks?: Check<ArrayΔ<A, IsReadOnly>>[]
 ): ArrayΔ<A, IsReadOnly> => ({
-  type: ArrayΔ$,
-  primitive: undefined as any,
-  child,
-  check: (a) => checkInt (child, isReadOnly, withChecks) (a, ''),
-  checkInt: checkInt (child, isReadOnly, withChecks),
-  checkWith: (p1) => Array (child, isReadOnly, p1),
-  asReadOnly: () =>
-    Array (child, true, withChecks as Check<ArrayΔ<A, true>>[] | undefined),
-  isReadOnly,
+  _: {
+    type: ArrayΔ$,
+    primitive: undefined as any,
+    child,
+    isReadOnly,
+    checkInt: checkInt (child, isReadOnly, withChecks),
+  },
+  Δ: {
+    check: (a) => checkInt (child, isReadOnly, withChecks) (a, ''),
+    checkWith: (p1) => Array (child, isReadOnly, p1),
+    asReadOnly: () =>
+      Array (child, true, withChecks as Check<ArrayΔ<A, true>>[] | undefined),
+  },
 });
-
-const isRo = Array (String).asReadOnly ();
-type X = TypeOf<typeof isRo>;
 
 export default Array;

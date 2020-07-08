@@ -27,18 +27,18 @@ const isTuple = <A extends (Schema & Checkable<Schema>)[]>(): Check<
 
 const doChildChecks = <A extends (Schema & Checkable<Schema>)[]>(
   path: string,
-  child: TupleΔ<A>['child']
+  child: TupleΔ<A>['_']['child']
 ) => (payload: any[]) =>
   sequence (ValidationModule) (
     payload.map ((v, i) =>
-      child[i].checkInt (v, buildPath (i, path), (child as any)?.child)
+      child[i]._.checkInt (v, buildPath (i, path), (child as any)?.child)
     )
   );
 
 const checkInt = <A extends (Schema & Checkable<Schema>)[]>(
   a: unknown,
   path: string,
-  child: TupleΔ<A>['child']
+  child: TupleΔ<A>['_']['child']
 ) =>
   rPipe (
     (a: unknown, path: string, child: any) => isTuple<A> () (a, path, child),

@@ -33,7 +33,7 @@ const doChildChecks = (
 ) =>
   sequence (ValidationModule) (
     Object.keys (child).map ((c) =>
-      child[c].checkInt (a[c], buildPath (path, c), child)
+      child[c]._.checkInt (a[c], buildPath (path, c), child)
     )
   );
 

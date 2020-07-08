@@ -8,19 +8,25 @@ type TupleΔ$ = typeof TupleΔ$;
 /**
  * TODO: Add comment
  */
-interface TupleΔ<A extends (Schema & Checkable<Schema>)[]>
-  extends Schema<TupleΔ$, TuplePrimitiveΔ$<A>>,
-    Checkable<TupleΔ<A>>,
-    Childable<A> {}
+type TupleΔ<A extends (Schema & Checkable<Schema>)[]> = Schema<
+  TupleΔ$,
+  TuplePrimitiveΔ$<A>
+> &
+  Checkable<TupleΔ<A>> &
+  Childable<A>;
 
 const Tuple = <A extends (Schema & Checkable<Schema>)[]>(
   ...child: A
 ): TupleΔ<A> => ({
-  type: TupleΔ$,
-  primitive: undefined as any,
-  child,
-  check: (a) => checkInt (a, '', child),
-  checkInt,
+  _: {
+    type: TupleΔ$,
+    primitive: undefined as any,
+    child,
+    checkInt,
+  },
+  Δ: {
+    check: (a) => checkInt (a, '', child),
+  },
 });
 
 type S = Schema;

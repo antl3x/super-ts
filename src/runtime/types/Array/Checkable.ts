@@ -15,7 +15,7 @@ const isArray = <A extends Schema, IsReadOnly extends boolean>(): Check<
   ArrayΔ<A, IsReadOnly>
 > => (a, path, child) =>
   globalThis.Array.isArray (a) && a.length > 0
-    ? ValidationModule.λ.Success (a as ArrayΔ<A, IsReadOnly>['primitive'])
+    ? ValidationModule.λ.Success (a as ArrayΔ<A, IsReadOnly>['_']['primitive'])
     : ValidationModule.λ.Failure ([
         {
           code: 'IS_ARRAY',
@@ -29,13 +29,13 @@ const isArray = <A extends Schema, IsReadOnly extends boolean>(): Check<
 const doWithChecks = <A extends Schema, IsReadOnly extends boolean>(
   path: string,
   withChecks?: Check<ArrayΔ<A, IsReadOnly>>[]
-) => (payload: ArrayΔ<A, IsReadOnly>['primitive']) =>
+) => (payload: ArrayΔ<A, IsReadOnly>['_']['primitive']) =>
   withChecks
     ? withChecks.map ((check) => check (payload, path))
     : [
         ValidationModule.λ.Success<
           InvalidCheck,
-          ArrayΔ<A, IsReadOnly>['primitive']
+          ArrayΔ<A, IsReadOnly>['_']['primitive']
         > (payload),
       ];
 
@@ -43,11 +43,11 @@ const doChildChecks = <
   A extends Schema & Checkable<A>,
   IsReadOnly extends boolean
 >(
-  payload: ArrayΔ<A, IsReadOnly>['primitive'],
+  payload: ArrayΔ<A, IsReadOnly>['_']['primitive'],
   path: string,
-  child: ArrayΔ<A, IsReadOnly>['child']
+  child: ArrayΔ<A, IsReadOnly>['_']['child']
 ) => (
-  withChecks: Validationλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['primitive']>[]
+  withChecks: Validationλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['_']['primitive']>[]
 ) =>
   sequence (ValidationModule) ([
     ...withChecks,
@@ -58,19 +58,19 @@ const doChildChecksCondition = <
   A extends Schema & Checkable<A>,
   IsReadOnly extends boolean
 >(
-  withChecks: Validationλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['primitive']>[],
-  payload: ArrayΔ<A, IsReadOnly>['primitive'],
+  withChecks: Validationλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['_']['primitive']>[],
+  payload: ArrayΔ<A, IsReadOnly>['_']['primitive'],
   path: string,
-  child: ArrayΔ<A, IsReadOnly>['child']
+  child: ArrayΔ<A, IsReadOnly>['_']['child']
 ) =>
   withChecks.some ((c) => c.λ.id === 'Success')
     ? (payload as any[]).map ((v, i) =>
-        child.checkInt (v, buildPath (i, path), (child as any)?.child)
+        child._.checkInt (v, buildPath (i, path), (child as any)?.child)
       )
     : [];
 
 const checkInt = <A extends Schema & Checkable<A>, IsReadOnly extends boolean>(
-  child: ArrayΔ<A, IsReadOnly>['child'],
+  child: ArrayΔ<A, IsReadOnly>['_']['child'],
   isReadOnly: IsReadOnly,
   withChecks?: Check<ArrayΔ<A, IsReadOnly>>[]
 ): Check<ArrayΔ<A, IsReadOnly>> => (a: unknown, path: string) =>

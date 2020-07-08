@@ -9,16 +9,16 @@ export { checkInt };
 const doChildChecks = <A extends (Schema & Checkable<Schema>)[]>(
   a: unknown,
   path: string,
-  child: UnionΔ<A>['child']
-) => child.map ((c) => c.checkInt (a, path, child));
+  child: UnionΔ<A>['_']['child']
+) => child.map ((c) => c._.checkInt (a, path, child));
 
 const suceedOrFail = <A extends (Schema & Checkable<Schema>)[]>(
-  a: UnionΔ<A>['primitive'],
+  a: UnionΔ<A>['_']['primitive'],
   path: string,
-  child: UnionΔ<A>['child']
+  child: UnionΔ<A>['_']['child']
 ) => (
   childResults: Validationλ<InvalidCheck, any>[]
-): Validationλ<InvalidCheck, UnionΔ<A>['primitive']> =>
+): Validationλ<InvalidCheck, UnionΔ<A>['_']['primitive']> =>
   childResults.some ((i) => i.λ.id === 'Success')
     ? ValidationModule.λ.Success (a)
     : ValidationModule.λ.Failure ([
@@ -32,7 +32,7 @@ const suceedOrFail = <A extends (Schema & Checkable<Schema>)[]>(
       ]);
 
 const checkInt = <A extends (Schema & Checkable<Schema>)[]>(
-  child: UnionΔ<A>['child']
+  child: UnionΔ<A>['_']['child']
 ) => (a: unknown, path: string) =>
   rPipe (
     (a: unknown, path: string) => doChildChecks (a, path, child),

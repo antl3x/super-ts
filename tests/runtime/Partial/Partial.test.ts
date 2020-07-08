@@ -11,14 +11,14 @@ describe ('Partial Type', () => {
     const Person = Partial ({
       firstName: String,
     });
-    expect (Person.type).toBe (PartialΔ$);
+    expect (Person._.type).toBe (PartialΔ$);
   });
 
   it ('When Partial is checked with incorrect payload, we expected to fail', () => {
     const payload = undefined;
     const isPerson = Partial ({
       firstName: String,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
@@ -26,7 +26,7 @@ describe ('Partial Type', () => {
     const payload = { firstName: undefined };
     const isPerson = Partial ({
       firstName: String,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeTruthy ();
   });
 
@@ -34,7 +34,7 @@ describe ('Partial Type', () => {
     const payload = { firstName: 'Mike' };
     const isPerson = Partial ({
       firstName: String,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeTruthy ();
   });
 
@@ -42,41 +42,41 @@ describe ('Partial Type', () => {
     const payload = { firstName: true };
     const isPerson = Partial ({
       firstName: String,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
   it ('When Partial is checked not respecting child custom check, we expected to fail', () => {
     const payload = { firstName: 'Mike' };
     const isPerson = Partial ({
-      firstName: String.checkWith ([isStringGt (10)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
   it ('When Partial is checked respecting child custom check, we expected to pass', () => {
     const payload = { firstName: 'Mike Pompeo' };
     const isPerson = Partial ({
-      firstName: String.checkWith ([isStringGt (10)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeTruthy ();
   });
 
   it ('When Partial is checked respecting first child custom check but not the second, we expected to fail', () => {
     const payload = { firstName: 'Mike Pompeo', age: 10 };
     const isPerson = Partial ({
-      firstName: String.checkWith ([isStringGt (10)]),
-      age: Number.checkWith ([isNumberGt (18)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+      age: Number.Δ.checkWith ([isNumberGt (18)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
   it ('When Partial is checked respecting first child custom check but not the second, we expected to fail', () => {
     const payload = { firstName: 'Mike', age: 20 };
     const isPerson = Partial ({
-      firstName: String.checkWith ([isStringGt (10)]),
-      age: Number.checkWith ([isNumberGt (18)]),
-    }).check (payload);
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+      age: Number.Δ.checkWith ([isNumberGt (18)]),
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeFalsy ();
   });
 
@@ -88,10 +88,10 @@ describe ('Partial Type', () => {
     };
     const Boss = Partial ({ firstName: String });
     const isPerson = Partial ({
-      firstName: String.checkWith ([isStringGt (10)]),
-      age: Number.checkWith ([isNumberGt (18)]),
+      firstName: String.Δ.checkWith ([isStringGt (10)]),
+      age: Number.Δ.checkWith ([isNumberGt (18)]),
       boss: Boss,
-    }).check (payload);
+    }).Δ.check (payload);
     expect (isSuccessOf (isPerson, payload)).toBeTruthy ();
   });
 });

@@ -19,23 +19,23 @@ const introspect = (a: any): string => {
 };
 
 const introspectArray = (a: any) =>
-  `${a.isReadOnly ? `readonly` : ``} ${introspect (a.child)}[]`;
+  `${a.isReadOnly ? `readonly` : ``} ${introspect (a._.child)}[]`;
 
-const introspectLiteral = (a: any) => `${a.child}`;
+const introspectLiteral = (a: any) => `${a._.child}`;
 
 const introspectUnion = <A extends (Schema & Checkable<Schema>)[]>(
   a: UnionΔ<A>
-) => `(${a.child.map (introspect).join (' | ')})`;
+) => `(${a._.child.map (introspect).join (' | ')})`;
 
 const introspectRecord = (a: RecordΔ<{ [key: string]: Schema }>) =>
-  `{ ${Object.keys (a.child)
-    .map ((k) => `${k}: ${introspect (a.child[k])};`)
+  `{ ${Object.keys (a._.child)
+    .map ((k) => `${k}: ${introspect (a._.child[k])};`)
     .join (' ')} }`;
 
 const introspectPartial = (a: PartialΔ<{ [key: string]: Schema }>) =>
-  `{ ${Object.keys (a.child)
-    .map ((k) => `${k}?: ${introspect (a.child[k])};`)
+  `{ ${Object.keys (a._.child)
+    .map ((k) => `${k}?: ${introspect (a._.child[k])};`)
     .join (' ')} }`;
 
 const introspectTuple = (a: TupleΔ<(Schema & Checkable<Schema>)[]>) =>
-  `[${a.child.map (introspect).join (', ')}]`;
+  `[${a._.child.map (introspect).join (', ')}]`;

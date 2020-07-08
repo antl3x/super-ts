@@ -8,13 +8,17 @@ type BooleanΔ$ = typeof BooleanΔ$;
 /**
  * TODO: Add comment
  */
-interface BooleanΔ extends Schema<BooleanΔ$, boolean>, Checkable<BooleanΔ> {}
+type BooleanΔ = Schema<BooleanΔ$, boolean> & Checkable<BooleanΔ>;
 
 const Boolean: BooleanΔ = {
-  type: BooleanΔ$,
-  primitive: undefined as any,
-  check: (a) => checkInt (a, ''),
-  checkInt,
-};
+  _: {
+    type: BooleanΔ$,
+    primitive: undefined as any,
+    checkInt
+  },
+  Δ: {
+    check: (a) => checkInt (a, ''),
+  }
+}
 
 export default Boolean;
