@@ -11,11 +11,27 @@ Forwarding to be an all-in-one solution, **super-ts** is divided into two main c
 - _Runtime Types_: static and runtime type checking
 - _Algebraic Types_: Monads, Functors, Semigroups and others.
 
-## <span id="section:runtime-types">Instalation</span>
+## <span id="section:instalation">Instalation</span>
 
-`npm install super-ts` will install super-ts for use in Node.js.
+`npm install super-ts` will install super-ts for use.
 
-PS: If you are using the package with ESModules over **node** you should run your application with the flag `--experimental-specifier-resolution=node`
+## <span id="section:consuming">Consuming</span>
+
+You can use **super-ts** in two flavors: CommonJS or ES Modules.
+
+```ts
+import { String } from "super-ts/cjs/runtime";
+import { Either } from "super-ts/cjs/algebraic";
+```
+
+```ts
+import { String } from "super-ts/esm/runtime";
+import { Either } from "super-ts/esm/algebraic";
+```
+
+PS: If you are using the package with ES Modules over **node** you should run your application with the flag `--experimental-specifier-resolution=node`
+
+ES Modules enables [tree shaking](https://webpack.js.org/guides/tree-shaking/) to be possible using bundlers.
 
 ## <span id="section:runtime-types">Δ Runtime Types</span>
 
