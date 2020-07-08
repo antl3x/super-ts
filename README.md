@@ -4,7 +4,7 @@
 
 **super-ts** is a Typescript functional programming library inspired by [Haskell](https://www.haskell.org/) and [PureScript](http://www.purescript.org/) providing both runtime type checking and functional algebraic data types.
 
-**super-ts** were built to unify concepts and tools of some wonderful libraries, such _[fp-ts](https://github.com/gcanti/fp-ts)_, _[io-ts](https://github.com/gcanti/io-ts)_ and _[fp-ts](https://github.com/pelotom/runtypes)_.
+**super-ts** were built to unify concepts and tools of some wonderful libraries, such _[fp-ts](https://github.com/gcanti/fp-ts)_, _[io-ts](https://github.com/gcanti/io-ts)_ and _[runtypes](https://github.com/pelotom/runtypes)_.
 
 Forwarding to be an all-in-one solution, **super-ts** is divided into two main categories: **Algebraic Types** & **Runtime Types**;
 
