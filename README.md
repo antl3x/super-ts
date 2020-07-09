@@ -122,26 +122,23 @@ import { TypeOf } from 'super-ts/esm/runtime'
 
 type Player = TypeOf<typeof Player>;
 
-/**
- * Inferred Player Type
- *
- * type Player = {
-    firstName: string;
-    lastName: string;
-    salaryOnTeam: [number, {
-        name: string;
-        yearFounded: number;
-        league: "NFL" | "MLB" | "NBA" | "WNBA";
-        type: "team";
-    }];
-    age: number;
-    isActive: boolean;
-    teamsPlayed: {
-        ...;
-    }[];
-    gender: "Male" | "Female" | "Other";
-    type: "player";
-}
+// type Player = {
+//    firstName: string;
+//    lastName: string;
+//    salaryOnTeam: [number, {
+//        name: string;
+//        yearFounded: number;
+//        league: "NFL" | "MLB" | "NBA" | "WNBA";
+//        type: "team";
+//    }];
+//    age: number;
+//    isActive: boolean;
+//    teamsPlayed: {
+//        ...;
+//    }[];
+//    gender: "Male" | "Female" | "Other";
+//    type: "player";
+// }
 
 
 ```
@@ -160,6 +157,13 @@ of _InvalidCheck_ containing all the errors found on that payload.
 **Example**
 
 ```ts
+import { identity } from 'super-ts/common/identity';
+import { Validation } from 'super-ts/algebraic';
+
+/** other imports .. */
+
+/** above code .. */
+
 const Team = Record({
   name: String,
   yearFounded: Number,
@@ -174,22 +178,24 @@ const teamInvalidPayload = {
   type: "team",
 };
 
-const Result = Team.Δ.check(teamInvalidPayload);
+const isValidTeam = Team.Δ.check(teamInvalidPayload);
 
-/**
- * [
-    {
-        code: 'IS_STRING',
-        message: 'Expected string but found (null :: object)',
-        path: 'name'
-    },
-    {
-        code: 'IS_NUMBER',
-        message: 'Expected Number but found (1974 :: string)',
-        path: 'yearFounded'
-    }
-  ]
- */
+const isValidTeamRes = Validation.λ.fold (identity, identity) (isValidTeam);
+
+
+// isValidTeam = [
+//    {
+//        code: 'IS_STRING',
+//        message: 'Expected string but found (null :: object)',
+//        path: 'name'
+//    },
+//    {
+//        code: 'IS_NUMBER',
+//        message: 'Expected Number but found (1974 :: string)',
+//        path: 'yearFounded'
+//    }
+//  ]
+
 ```
 
 ## <span id="section:algebraic-types">λ Algebraic Types</span>
