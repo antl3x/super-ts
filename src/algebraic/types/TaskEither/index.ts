@@ -6,7 +6,7 @@ import { ap } from './Apply';
 import { map, mapU } from './Functor';
 import { TaskEither$λ } from './TaskEither';
 import { fromValidation } from './Functions';
-import { fold } from '../Either/Functions';
+import { fold } from './Functions';
 
 type TaskEitherModule = ApplicativeOf2<TaskEither$λ> &
   FunctorOf2<TaskEither$λ> &
