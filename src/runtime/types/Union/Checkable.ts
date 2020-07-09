@@ -1,7 +1,7 @@
 import ValidationModule from '@algebraic/types/Validation';
 import { Validationλ } from '@algebraic/types/Validation/Validation';
 import { introspect } from 'src/runtime/introspection';
-import { Checkable, InvalidCheck, Schema, Check } from '@runtime/defs';
+import { Checkable, InvalidCheck, Schema } from '@runtime/defs';
 import rPipe from 'ramda/src/pipe';
 import Union, { UnionΔ } from './Union';
 export { checkInt };

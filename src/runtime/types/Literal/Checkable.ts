@@ -9,7 +9,7 @@ const isLiteral: Check<LiteralΔ<any>> = (a, path, child) =>
     : ValidationModule.λ.Failure ([
         {
           code: 'IS_LITERAL',
-          message: `Expected literal (${child} :: ${typeof child}) but found (${a} :: ${typeof a}) as value.`,
+          message: `Expected literal (${child} :: ${typeof child}) but found (${a} :: ${typeof a})`,
           path,
         },
       ]);
