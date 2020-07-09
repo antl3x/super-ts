@@ -9,13 +9,13 @@ import { PartialΔ$, PartialΔ } from '@runtime/types/Partial/Partial';
 export { introspect };
 
 const introspect = (a: any): string => {
-  if (a?.type === ArrayΔ$) return introspectArray (a);
-  if (a?.type === LiteralΔ$) return introspectLiteral (a);
-  if (a?.type === UnionΔ$) return introspectUnion (a);
-  if (a?.type === RecordΔ$) return introspectRecord (a);
-  if (a?.type === TupleΔ$) return introspectTuple (a);
-  if (a?.type === PartialΔ$) return introspectPartial (a);
-  return (a?.type && a.type.toString ().toLowerCase ().slice (7, -1)) || ``;
+  if (a?._.type === ArrayΔ$) return introspectArray (a);
+  if (a?._.type === LiteralΔ$) return introspectLiteral (a);
+  if (a?._.type === UnionΔ$) return introspectUnion (a);
+  if (a?._.type === RecordΔ$) return introspectRecord (a);
+  if (a?._.type === TupleΔ$) return introspectTuple (a);
+  if (a?._.type === PartialΔ$) return introspectPartial (a);
+  return (a?._.type && a._.type.toString ().toLowerCase ().slice (7, -1)) || ``;
 };
 
 const introspectArray = (a: any) =>
