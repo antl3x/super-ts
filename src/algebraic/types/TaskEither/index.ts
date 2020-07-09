@@ -1,10 +1,11 @@
-import type { ApplicativeOf2 } from "@algebraic/defs/Applicative";
-import type { ApplyOf2 } from "@algebraic/defs/Apply";
-import type { FunctorOf2 } from "@algebraic/defs/Functor";
-import { Left, of, Right } from "./Applicative";
-import { ap } from "./Apply";
-import { map, mapU } from "./Functor";
-import { TaskEither$λ } from "./TaskEither";
+import type { ApplicativeOf2 } from '@algebraic/defs/Applicative';
+import type { ApplyOf2 } from '@algebraic/defs/Apply';
+import type { FunctorOf2 } from '@algebraic/defs/Functor';
+import { Left, of, Right } from './Applicative';
+import { ap } from './Apply';
+import { map, mapU } from './Functor';
+import { TaskEither$λ } from './TaskEither';
+import { fromValidation } from './Functions';
 
 type TaskEitherModule = ApplicativeOf2<TaskEither$λ> &
   FunctorOf2<TaskEither$λ> &
@@ -12,6 +13,7 @@ type TaskEitherModule = ApplicativeOf2<TaskEither$λ> &
     λ: {
       Left: typeof Left;
       Right: typeof Right;
+      fromValidation: typeof fromValidation;
     };
   };
 
@@ -23,6 +25,7 @@ const TaskEitherModule: TaskEitherModule = {
     map,
     Left,
     Right,
+    fromValidation
   },
   λU: {
     kind: TaskEither$λ,
