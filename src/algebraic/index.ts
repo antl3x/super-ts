@@ -1,1 +1,7 @@
 export { default as Array } from '@algebraic/types/Array'
+export { default as Either } from '@algebraic/types/Either'
+export { default as Maybe } from '@algebraic/types/Maybe'
+export { default as NonEmptyArray } from '@algebraic/types/NonEmptyArray'
+export { default as Task } from '@algebraic/types/Task'
+export { default as TaskEither } from '@algebraic/types/TaskEither'
+export { default as Validation } from '@algebraic/types/Validation'
