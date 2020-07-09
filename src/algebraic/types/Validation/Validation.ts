@@ -1,13 +1,13 @@
-import type { NonEmptyArrayλ } from "../NonEmptyArray/NonEmptyArray";
+import type { NonEmptyArrayλ } from '../NonEmptyArray/NonEmptyArray';
 
 export { Validation$λ };
 export type { Validationλ, Successλ, Failureλ };
 
-const Validation$λ = "Validation";
+const Validation$λ = 'Validation';
 type Validation$λ = typeof Validation$λ;
 type Validationλ<A, B> = Failureλ<A> | Successλ<B>;
 
-declare module "@hkt" {
+declare module  '../../../hkt' {
   interface Type2Kind2<A = unknown, B = unknown> {
     readonly [Validation$λ]: Validationλ<A, B>;
   }
@@ -19,7 +19,7 @@ declare module "@hkt" {
 
 interface Failureλ<A> {
   λ: {
-    id: "Failure";
+    id: 'Failure';
     kind: Validation$λ;
     type: A;
     value: NonEmptyArrayλ<A>;
@@ -32,7 +32,7 @@ interface Failureλ<A> {
 
 interface Successλ<B> {
   λ: {
-    id: "Success";
+    id: 'Success';
     kind: Validation$λ;
     type: B;
     value: B;

@@ -5,7 +5,7 @@ const Maybe$λ = 'Maybe';
 type Maybe$λ = typeof Maybe$λ;
 type Maybeλ<A> = Nothingλ | Justλ<A>;
 
-declare module  '@hkt' {
+declare module  '../../../hkt' {
   interface Type2Kind1<A> {
     readonly [Maybe$λ]: Maybeλ<A>;
   }

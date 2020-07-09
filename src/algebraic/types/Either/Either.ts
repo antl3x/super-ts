@@ -5,7 +5,7 @@ const Either$λ = 'Either';
 type Either$λ = typeof Either$λ;
 type Eitherλ<A, B> = Leftλ<A, B> | Rightλ<A, B>;
 
-declare module  '@hkt' {
+declare module  '../../../hkt' {
   interface Type2Kind2<A = unknown, B = unknown> {
     readonly [Either$λ]: Eitherλ<A, B>;
   }
