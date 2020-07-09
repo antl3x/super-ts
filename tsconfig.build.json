@@ -19,6 +19,7 @@
     "paths": {
       "@algebraic/*": ["src/algebraic/*"],
       "@runtime/*": ["src/runtime/*"],
+      "@common/*": ["src/common/*"],
       "@hkt": ["src/hkt/index.ts"]
     }
   },

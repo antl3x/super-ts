@@ -3,6 +3,7 @@ module.exports = {
   moduleNameMapper: {
     '^@runtime/(.*)$': 'src/runtime/$1',
     '^@algebraic/(.*)$': 'src/algebraic/$1',
+    '^@common/(.*)$': 'src/common/$1',
   },
   preset: 'ts-jest',
   testEnvironment: 'node',
