@@ -12,7 +12,8 @@
     "test": "scripty",
     "test:watch": "scripty",
     "build": "scripty",
-    "build:watch": "scripty"
+    "build:watch": "scripty",
+    "prepublish": "pnpm run build && pnpm run test"
   },
   "repository": {
     "type": "git",
