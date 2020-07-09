@@ -183,7 +183,7 @@ const isValidTeam = Team.Δ.check(teamInvalidPayload);
 const isValidTeamRes = Validation.λ.fold (identity, identity) (isValidTeam);
 
 
-// isValidTeam = [
+// isValidTeamRes = [
 //    {
 //        code: 'IS_STRING',
 //        message: 'Expected string but found (null :: object)',
