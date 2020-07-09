@@ -6,6 +6,7 @@ import { ap } from './Apply';
 import { map, mapU } from './Functor';
 import { TaskEither$λ } from './TaskEither';
 import { fromValidation } from './Functions';
+import { fold } from '../Either/Functions';
 
 type TaskEitherModule = ApplicativeOf2<TaskEither$λ> &
   FunctorOf2<TaskEither$λ> &
@@ -14,6 +15,7 @@ type TaskEitherModule = ApplicativeOf2<TaskEither$λ> &
       Left: typeof Left;
       Right: typeof Right;
       fromValidation: typeof fromValidation;
+      fold: typeof fold;
     };
   };
 
@@ -25,7 +27,8 @@ const TaskEitherModule: TaskEitherModule = {
     map,
     Left,
     Right,
-    fromValidation
+    fromValidation,
+    fold
   },
   λU: {
     kind: TaskEither$λ,
