@@ -21,4 +21,4 @@ const chain = <A, B>(p1:  (b: A) => Taskλ<B>) =>
  */
 const chainU = <A, B, C>(p1: (b: A) => Taskλ<B>, p2: Taskλ<A>): Taskλ<B> =>
   
-  () => p2 ().then (a => p1 (a)).then ()
+  () => p2 ().then (a => p1 (a) ())
