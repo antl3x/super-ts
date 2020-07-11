@@ -6,11 +6,11 @@ export { Right as of, Right, Left };
 /**
  * TODO: Add comment
  */
-const Right = <A = never, B = never>(p1: B | Promise<B>): TaskEitherλ<A, B> =>
-  Task.λ.of (Either.λ.of (p1 as B));
+const Right = <A = never, B = never>(p1: B): TaskEitherλ<A, B> =>
+  Task.λ.of (Either.λ.of (p1));
 
 /**
  * TODO: Add comment
  */
-const Left = <A = never, B = never>(p1: A | Promise<A>): TaskEitherλ<A, B> =>
-  Task.λ.of (Either.λ.Left (p1 as A));
+const Left = <A = never, B = never>(p1: A): TaskEitherλ<A, B> =>
+  Task.λ.of (Either.λ.Left (p1));
