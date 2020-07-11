@@ -5,7 +5,7 @@ import { Left, of, Right } from './Applicative';
 import { ap } from './Apply';
 import { map, mapU } from './Functor';
 import { TaskEither$λ } from './TaskEither';
-import { fromValidation, tryCatch } from './Functions';
+import { fromValidation, tryCatch, foldUnion } from './Functions';
 import { fold } from './Functions';
 
 type TaskEitherModule = {
@@ -14,6 +14,7 @@ type TaskEitherModule = {
     Right: typeof Right;
     fromValidation: typeof fromValidation;
     fold: typeof fold;
+    foldUnion: typeof foldUnion;
     of: typeof of;
     tryCatch: typeof tryCatch;
   };
@@ -32,6 +33,7 @@ const TaskEitherModule: TaskEitherModule = {
     Right,
     fromValidation,
     fold,
+    foldUnion,
     tryCatch
   },
   λU: {

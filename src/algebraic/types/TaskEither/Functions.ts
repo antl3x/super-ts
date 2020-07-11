@@ -6,7 +6,7 @@ import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
 import EitherModule from '../Either';
 import { Taskλ } from '../Task/Task';
 
-export { fromValidation, fold, tryCatch };
+export { fromValidation, fold, foldUnion, tryCatch };
 
 /**
  * TODO: Add comment
@@ -22,10 +22,17 @@ const fromValidation = <A, B>(p1: Validationλ<A, B>): TaskEitherλ<NonEmptyArra
  * @param p1
  */
 const fold = <A, B, C>(
-    onLeft: (a: A) => C,
-    onRight: (b: B) => C
-  ) => (p1: TaskEitherλ<A, B>): Taskλ<C> => 
-    () => p1 ().then (EitherModule.λ.fold (onLeft, onRight))
+  onLeft: (a: A) => C,
+  onRight: (b: B) => C
+) => (p1: TaskEitherλ<A, B>): Taskλ<C> => 
+  () => p1 ().then (EitherModule.λ.fold (onLeft, onRight))
+
+/**
+ * TODO: Add comment
+ * @param p1
+ */
+const foldUnion = <A, B>(p1: TaskEitherλ<A, B>): Taskλ<A | B> => 
+  () => p1 ().then (EitherModule.λ.foldUnion)
 
 /**
  * TODO: Add comment
