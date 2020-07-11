@@ -1,6 +1,6 @@
 import type { Eitherλ, Rightλ, Leftλ } from './Either';
 
-export { isLeft, isRight, fold };
+export { isLeft, isRight, fold, foldUnion };
 
 /**
  * TODO: Add comment
@@ -26,3 +26,10 @@ const fold = <A, B, C>(
   onRight: (b: B) => C
 ) => (p1: Eitherλ<A, B>) =>
   isLeft (p1) ? onLeft (p1.λ.value) : onRight (p1.λ.value);
+
+/**
+ * TODO: Add comment
+ * @param p1
+ */
+const foldUnion = <A, B>(p1: Eitherλ<A, B>): A | B =>
+  p1.λ.value;

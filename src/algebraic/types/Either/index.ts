@@ -5,12 +5,17 @@ import { of, Right, Left } from './Applicative';
 import { ap } from './Apply';
 import { Either$λ } from './Either';
 import { map, mapU } from './Functor';
-import { fold } from './Functions';
+import { fold, foldUnion } from './Functions';
 
 type EitherModule = ApplicativeOf2<Either$λ> &
   FunctorOf2<Either$λ> &
   ApplyOf2<Either$λ> & {
-    λ: { Left: typeof Left; Right: typeof Right; fold: typeof fold };
+    λ: {
+      Left: typeof Left;
+      Right: typeof Right;
+      fold: typeof fold;
+      foldUnion: typeof foldUnion;
+    };
   };
 
 const EitherModule: EitherModule = {
@@ -21,7 +26,8 @@ const EitherModule: EitherModule = {
     map,
     Left,
     Right,
-    fold
+    fold,
+    foldUnion,
   },
   λU: {
     kind: Either$λ,
