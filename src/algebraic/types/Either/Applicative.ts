@@ -10,7 +10,6 @@ const Right = <A = never, B = never>(p1: B): Eitherλ<A, B> => ({
   λ: {
     id: 'Right',
     kind: Either$λ,
-    typeA: undefined as any,
     typeB: undefined as any,
     value: p1,
   },
@@ -24,7 +23,6 @@ const Left = <A = never, B = never>(p1: A): Eitherλ<A, B> => ({
     id: 'Left',
     kind: Either$λ,
     typeA: undefined as any,
-    typeB: undefined as any,
     value: p1,
   },
 });

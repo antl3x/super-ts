@@ -3,10 +3,10 @@ export type { Eitherλ, Rightλ, Leftλ };
 
 const Either$λ = 'Either';
 type Either$λ = typeof Either$λ;
-type Eitherλ<A, B> = Leftλ<A, B> | Rightλ<A, B>;
+type Eitherλ<A, B> = Leftλ<A> | Rightλ<B>;
 
 declare module  '../../../hkt' {
-  interface Type2Kind2<A = unknown, B = unknown> {
+  interface Type2Kind2<A, B> {
     readonly [Either$λ]: Eitherλ<A, B>;
   }
 }
@@ -14,12 +14,11 @@ declare module  '../../../hkt' {
 /**
  * TODO: Add comment
  */
-interface Leftλ<A, B> {
+interface Leftλ<A> {
   λ: {
     id: 'Left';
     kind: Either$λ;
     typeA: A;
-    typeB: B;
     value: A;
   };
 }
@@ -27,11 +26,10 @@ interface Leftλ<A, B> {
 /**
  * TODO: Add comment
  */
-interface Rightλ<A, B> {
+interface Rightλ<B> {
   λ: {
     id: 'Right';
     kind: Either$λ;
-    typeA: A;
     typeB: B;
     value: B;
   };
