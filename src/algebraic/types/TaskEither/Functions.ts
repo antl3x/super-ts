@@ -4,8 +4,9 @@ import TaskEitherModule from '.';
 import { Validationλ } from '@algebraic/types/Validation/Validation';
 import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
 import EitherModule from '../Either';
+import { Taskλ } from '../Task/Task';
 
-export { fromValidation, fold };
+export { fromValidation, fold, tryCatch };
 
 /**
  * TODO: Add comment
@@ -23,6 +24,11 @@ const fromValidation = <A, B>(p1: Validationλ<A, B>): TaskEitherλ<NonEmptyArra
 const fold = <A, B, C>(
     onLeft: (a: A) => C,
     onRight: (b: B) => C
-  ) => (p1: TaskEitherλ<A, B>): Promise<C> => 
-    p1.λ.value ().then (EitherModule.λ.fold (onLeft, onRight))
-  
+  ) => (p1: TaskEitherλ<A, B>): Taskλ<C> => 
+    () => p1 ().then (EitherModule.λ.fold (onLeft, onRight))
+
+/**
+ * TODO: Add comment
+ */
+const tryCatch = <A, B>(p1: () => Promise<B>, onRejected: (reason: unknown) => A): TaskEitherλ<A, B> =>
+   () => p1 ().then (EitherModule.λ.Right, (reason) => EitherModule.λ.Left (onRejected (reason)))

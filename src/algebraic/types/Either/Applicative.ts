@@ -6,7 +6,7 @@ export { Right as of, Right, Left };
 /**
  * TODO: Add comment
  */
-const Right = <A = unknown, B = unknown>(p1: B): Eitherλ<A, B> => ({
+const Right = <A = never, B = never>(p1: B): Eitherλ<A, B> => ({
   λ: {
     id: 'Right',
     kind: Either$λ,
@@ -19,7 +19,7 @@ const Right = <A = unknown, B = unknown>(p1: B): Eitherλ<A, B> => ({
 /**
  * TODO: Add comment
  */
-const Left = <A = unknown, B = unknown>(p1: A): Eitherλ<A, B> => ({
+const Left = <A = never, B = never>(p1: A): Eitherλ<A, B> => ({
   λ: {
     id: 'Left',
     kind: Either$λ,

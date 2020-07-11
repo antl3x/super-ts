@@ -21,4 +21,4 @@ const map = <A, B>(p1: (b: A) => B) =>
  */
 const mapU = <A, B>(p1: (b: A) => B, p2: Taskλ<A>): Taskλ<B> =>
 
-  of (p2.λ.value ().then (p1));
+  of (p2 ().then (p1));

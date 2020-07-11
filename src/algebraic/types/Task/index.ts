@@ -8,7 +8,11 @@ import { Task$λ } from './Task';
 import { ChainOf1 } from '@algebraic/defs/Chain';
 import { chain, chainU } from './Chain';
 
-type TaskModule = ApplicativeOf1<Task$λ> &
+type TaskModule =  {
+  λ: {
+    of: typeof of;
+  };
+} & ApplicativeOf1<Task$λ> &
   FunctorOf1<Task$λ> &
   ChainOf1<Task$λ> &
   ApplyOf1<Task$λ>;

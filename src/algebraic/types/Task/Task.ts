@@ -14,12 +14,7 @@ declare module  '../../../hkt' {
  * TODO: Add comment
  */
 interface Taskλ<A> {
-  λ: {
-    id: Task$λ;
-    kind: Task$λ;
-    typeA: A;
-    value: () => Promise<A>;
-  };
+  (): Promise<A>;
 }
 
 
