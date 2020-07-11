@@ -7,4 +7,4 @@ set -e
 echo -e "👻 💉 ${bold}[funtypes/test]${normal} starting unit testing with jest (watch mode).."
 
 node_modules/.bin/nodemon -e ts -w src -w tests \
- -x 'pnpm run build && jest --config jest.config.js'
+ -x 'jest --config jest.config.js'
