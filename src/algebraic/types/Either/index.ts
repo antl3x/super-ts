@@ -5,10 +5,13 @@ import { of, Right, Left } from './Applicative';
 import { ap } from './Apply';
 import { Either$λ } from './Either';
 import { map, mapU } from './Functor';
+import { chain, chainU } from './Chain';
 import { fold, foldUnion } from './Functions';
+import { ChainOf2 } from '@algebraic/defs/Chain';
 
 type EitherModule = ApplicativeOf2<Either$λ> &
   FunctorOf2<Either$λ> &
+  ChainOf2<Either$λ> &
   ApplyOf2<Either$λ> & {
     λ: {
       Left: typeof Left;
@@ -28,10 +31,12 @@ const EitherModule: EitherModule = {
     Right,
     fold,
     foldUnion,
+    chain
   },
   λU: {
     kind: Either$λ,
     map: mapU,
+    chain: chainU
   },
 };
 
