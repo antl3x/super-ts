@@ -9,6 +9,7 @@ import { TaskEither$λ } from './TaskEither';
 import { fromValidation, tryCatch, foldUnion } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
+import { mapLeft } from './Functions';
 
 type TaskEitherModule = {
   λ: {
@@ -19,6 +20,7 @@ type TaskEitherModule = {
     foldUnion: typeof foldUnion;
     of: typeof of;
     tryCatch: typeof tryCatch;
+    mapLeft: typeof mapLeft;
   };
 } &
   ApplicativeOf2<TaskEither$λ> &
@@ -38,7 +40,8 @@ const TaskEitherModule: TaskEitherModule = {
     fold,
     foldUnion,
     tryCatch,
-    chain
+    chain,
+    mapLeft
   },
   λU: {
     kind: TaskEither$λ,

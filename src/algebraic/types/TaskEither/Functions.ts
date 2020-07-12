@@ -5,8 +5,9 @@ import { Validationλ } from '@algebraic/types/Validation/Validation';
 import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
 import EitherModule from '../Either';
 import { Taskλ } from '../Task/Task';
+import TaskModule from '../Task';
 
-export { fromValidation, fold, foldUnion, tryCatch };
+export { fromValidation, fold, foldUnion, tryCatch, mapLeft };
 
 /**
  * TODO: Add comment
@@ -38,4 +39,11 @@ const foldUnion = <A, B>(p1: TaskEitherλ<A, B>): Taskλ<A | B> =>
  * TODO: Add comment
  */
 const tryCatch = <A, B>(p1: () => Promise<B>, onRejected: (reason: unknown) => A): TaskEitherλ<A, B> =>
-   () => p1 ().then (EitherModule.λ.Right, (reason) => EitherModule.λ.Left (onRejected (reason)))
+   () => p1 ().then (EitherModule.λ.Right, (reason) => EitherModule.λ.Left (onRejected (reason)));
+
+/**
+ * TODO: Add comment
+ */
+const mapLeft = <A, B, C>(p1: (a: A) => C) => (p2: TaskEitherλ<A, B>): TaskEitherλ<C, B> =>
+  TaskModule.λU.map (EitherModule.λ.mapLeft (p1), p2)
+
