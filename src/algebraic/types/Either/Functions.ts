@@ -1,6 +1,7 @@
 import type { Eitherλ, Rightλ, Leftλ } from './Either';
+import EitherModule from '.';
 
-export { isLeft, isRight, fold, foldUnion };
+export { isLeft, isRight, fold, foldUnion, mapLeft, mapLeftU };
 
 /**
  * TODO: Add comment
@@ -33,3 +34,17 @@ const fold = <A, B, C>(
  */
 const foldUnion = <A, B>(p1: Eitherλ<A, B>): A | B =>
   p1.λ.value;
+
+/**
+ * TODO: Add comment
+ * @param p1
+ */
+const mapLeft = <A, B, C>(p1: (a: A) => C) => (p2: Eitherλ<A, B>): Eitherλ<C, B> =>
+  mapLeftU (p1, p2)
+
+/**
+ * TODO: Add comment
+ * @param p1
+ */
+const mapLeftU = <A, B, C>(p1: (a: A) => C, p2: Eitherλ<A, B>): Eitherλ<C, B> =>
+ isLeft (p2) ? EitherModule.λ.Left (p1 (p2.λ.value)) : p2
