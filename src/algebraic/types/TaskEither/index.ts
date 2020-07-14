@@ -4,7 +4,7 @@ import type { FunctorOf2 } from '@algebraic/defs/Functor';
 import { Left, of, Right } from './Applicative';
 import { ap } from './Apply';
 import { map, mapU } from './Functor';
-import { chain, chainU } from './Chain';
+import { chain, chainU, flatMap } from './Chain';
 import { TaskEither$λ } from './TaskEither';
 import { fromValidation, tryCatch, foldUnion } from './Functions';
 import { fold } from './Functions';
@@ -21,6 +21,7 @@ type TaskEitherModule = {
     of: typeof of;
     tryCatch: typeof tryCatch;
     mapLeft: typeof mapLeft;
+    flatMap: typeof flatMap;
   };
 } &
   ApplicativeOf2<TaskEither$λ> &
@@ -41,7 +42,8 @@ const TaskEitherModule: TaskEitherModule = {
     foldUnion,
     tryCatch,
     chain,
-    mapLeft
+    mapLeft,
+    flatMap
   },
   λU: {
     kind: TaskEither$λ,
