@@ -4,28 +4,28 @@ import type { FunctorOf1 } from '@algebraic/defs/Functor';
 import { of } from './Applicative';
 import { ap } from './Apply';
 import { map, mapU } from './Functor';
-import { Task$λ } from './Task';
+import { Async$λ } from './Async';
 import { ChainOf1 } from '@algebraic/defs/Chain';
 import { chain, chainU } from './Chain';
 
-type TaskModule = ApplicativeOf1<Task$λ> &
-  FunctorOf1<Task$λ> &
-  ChainOf1<Task$λ> &
-  ApplyOf1<Task$λ>;
+type AsyncModule = ApplicativeOf1<Async$λ> &
+  FunctorOf1<Async$λ> &
+  ChainOf1<Async$λ> &
+  ApplyOf1<Async$λ>;
 
-const TaskModule: TaskModule = {
+const AsyncModule: AsyncModule = {
   λ: {
-    kind: Task$λ,
+    kind: Async$λ,
     ap,
     of,
     map,
     chain
   },
   λU: {
-    kind: Task$λ,
+    kind: Async$λ,
     map: mapU,
     chain: chainU
   },
 };
 
-export default TaskModule;
+export default AsyncModule;

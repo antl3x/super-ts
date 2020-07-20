@@ -5,13 +5,13 @@ import { Left, of, Right } from './Applicative';
 import { ap } from './Apply';
 import { map, mapU } from './Functor';
 import { chain, chainU, flatMap } from './Chain';
-import { TaskEither$λ } from './TaskEither';
+import { AsyncEither$λ } from './AsyncEither';
 import { fromValidation, tryCatch, foldUnion } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 import { mapLeft } from './Functions';
 
-type TaskEitherModule = {
+type AsyncEitherModule = {
   λ: {
     Left: typeof Left;
     Right: typeof Right;
@@ -24,14 +24,14 @@ type TaskEitherModule = {
     flatMap: typeof flatMap;
   };
 } &
-  ApplicativeOf2<TaskEither$λ> &
-  FunctorOf2<TaskEither$λ> &
-  ChainOf2<TaskEither$λ> &
-  ApplyOf2<TaskEither$λ>;
+  ApplicativeOf2<AsyncEither$λ> &
+  FunctorOf2<AsyncEither$λ> &
+  ChainOf2<AsyncEither$λ> &
+  ApplyOf2<AsyncEither$λ>;
 
-const TaskEitherModule: TaskEitherModule = {
+const AsyncEitherModule: AsyncEitherModule = {
   λ: {
-    kind: TaskEither$λ,
+    kind: AsyncEither$λ,
     ap,
     of,
     map,
@@ -46,10 +46,10 @@ const TaskEitherModule: TaskEitherModule = {
     flatMap
   },
   λU: {
-    kind: TaskEither$λ,
+    kind: AsyncEither$λ,
     map: mapU,
     chain: chainU
   },
 };
 
-export default TaskEitherModule;
+export default AsyncEitherModule;
