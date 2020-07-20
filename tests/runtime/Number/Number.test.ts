@@ -1,6 +1,6 @@
 import Number, { NumberΔ$ } from '@runtime/types/Number/Number';
 import { isGreaterThan } from '@runtime/types/Number/checks/isGreaterThan';
-import { isSuccessOf } from '@algebraic/types/Validation/Functions';
+import { isSuccessOf } from '@algebraic/types/Result/Functions';
 
 describe ('Number Type', () => {
   it ('Symbol identifier exists', () => {

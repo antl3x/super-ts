@@ -1,5 +1,5 @@
 import Literal, { LiteralΔ$ } from '@runtime/types/Literal/Literal';
-import { isSuccessOf } from '@algebraic/types/Validation/Functions';
+import { isSuccessOf } from '@algebraic/types/Result/Functions';
 
 describe ('Literal Type', () => {
   it ('Symbol identifier exists', () => {

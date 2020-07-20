@@ -1,5 +1,5 @@
 import Boolean, { BooleanΔ$ } from '@runtime/types/Boolean/Boolean';
-import { isSuccessOf } from '@algebraic/types/Validation/Functions';
+import { isSuccessOf } from '@algebraic/types/Result/Functions';
 
 describe ('Boolean Type', () => {
   it ('Symbol identifier exists', () => {

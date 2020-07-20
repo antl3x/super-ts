@@ -1,7 +1,7 @@
 import Array, { ArrayΔ$ } from '@runtime/types/Array/Array';
 import String from '@runtime/types/String/String';
 
-import { isSuccessOf } from '@algebraic/types/Validation/Functions';
+import { isSuccessOf } from '@algebraic/types/Result/Functions';
 import { isGreaterThan as isStringGt } from '@runtime/types/String/checks/isGreaterThan';
 import { isGreaterThan as isArrayGt } from '@runtime/types/Array/checks/isGreaterThan';
 

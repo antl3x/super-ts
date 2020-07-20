@@ -1,6 +1,6 @@
 import String, { StringΔ$ } from '@runtime/types/String/String';
 import { isGreaterThan } from '@runtime/types/String/checks/isGreaterThan';
-import { isSuccessOf } from '@algebraic/types/Validation/Functions';
+import { isSuccessOf } from '@algebraic/types/Result/Functions';
 
 describe ('String Type', () => {
   it ('Symbol identifier exists', () => {

@@ -2,7 +2,7 @@ import Partial, { PartialΔ$ } from '@runtime/types/Partial/Partial';
 import String from '@runtime/types/String/String';
 import Number from '@runtime/types/Number/Number';
 
-import { isSuccessOf } from '@algebraic/types/Validation/Functions';
+import { isSuccessOf } from '@algebraic/types/Result/Functions';
 import { isGreaterThan as isStringGt } from '@runtime/types/String/checks/isGreaterThan';
 import { isGreaterThan as isNumberGt } from '@runtime/types/Number/checks/isGreaterThan';
 
