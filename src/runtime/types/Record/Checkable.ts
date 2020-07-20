@@ -1,4 +1,4 @@
-import ValidationModule from '@algebraic/types/Validation';
+import ResultModule from '@algebraic/types/Result';
 import { introspect } from 'src/runtime/introspection';
 import { sequence } from '@algebraic/common/sequence';
 import { Check, Checkable, Schema } from '@runtime/defs';
@@ -15,8 +15,8 @@ const isRecord = <A extends { [key: string]: Schema }>(): Check<RecordΔ<A>> => 
   child
 ) =>
   typeof a === 'object'
-    ? ValidationModule.λ.Success (a as A)
-    : ValidationModule.λ.Failure ([
+    ? ResultModule.λ.Success (a as A)
+    : ResultModule.λ.Failure ([
         {
           code: 'IS_RECORD',
           message: `Expected ${introspect (
@@ -31,7 +31,7 @@ const doChildChecks = (
   path: string,
   child: { [key: string]: Checkable<Schema> }
 ) =>
-  sequence (ValidationModule) (
+  sequence (ResultModule) (
     Object.keys (child).map ((c) =>
       child[c]._.checkInt (a[c], buildPath (path, c), child)
     )
@@ -44,6 +44,6 @@ const checkInt = <A extends { [key: string]: Schema }>(
 ) =>
   rPipe (
     (a: unknown, path: string, child: any) => isRecord<A> () (a, path, child),
-    ValidationModule.λ.chain (() => doChildChecks (a, path, child)),
-    ValidationModule.λ.map (() => a as A)
+    ResultModule.λ.chain (() => doChildChecks (a, path, child)),
+    ResultModule.λ.map (() => a as A)
   ) (a, path, child);

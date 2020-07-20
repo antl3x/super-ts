@@ -1,10 +1,10 @@
-import ValidationModule from '@algebraic/types/Validation';
+import ResultModule from '@algebraic/types/Result';
 import { introspect } from '@runtime/introspection';
 import { sequence } from '@algebraic/common/sequence';
 import { Check, Checkable, Schema, InvalidCheck } from '@runtime/defs';
 import rPipe from 'ramda/src/pipe';
 import Partial, { PartialΔ } from './Partial';
-import { Validationλ } from '@algebraic/types/Validation/Validation';
+import { Resultλ } from '@algebraic/types/Result/Result';
 export { checkInt };
 
 const buildPath = (previousPath: string, currentPath: string) =>
@@ -14,8 +14,8 @@ const isPartial = <A extends { [key: string]: Schema }>(): Check<
   PartialΔ<A>
 > => (a, path, child) =>
   typeof a === 'object'
-    ? ValidationModule.λ.Success (a as any)
-    : ValidationModule.λ.Failure ([
+    ? ResultModule.λ.Success (a as any)
+    : ResultModule.λ.Failure ([
         {
           code: 'IS_PARTIAL',
           message: `Expected ${introspect (
@@ -29,11 +29,11 @@ const doChildChecks = (
   a: any,
   path: string,
   child: { [key: string]: Checkable<Schema> }
-): Validationλ<InvalidCheck, any[]> =>
-  sequence (ValidationModule) (
+): Resultλ<InvalidCheck, any[]> =>
+  sequence (ResultModule) (
     Object.keys (child).map ((c) => {
       return a[c] === undefined || a[c] === null
-        ? ValidationModule.λ.Success (a)
+        ? ResultModule.λ.Success (a)
         : child[c]._.checkInt (a[c], buildPath (path, c), child);
     })
   );
@@ -45,6 +45,6 @@ const checkInt = <A extends { [key: string]: Schema | undefined }>(
 ) =>
   rPipe (
     (a: unknown, path: string, child: any) => isPartial () (a, path, child),
-    ValidationModule.λ.chain (() => doChildChecks (a, path, child)),
-    ValidationModule.λ.map (() => a as A)
+    ResultModule.λ.chain (() => doChildChecks (a, path, child)),
+    ResultModule.λ.map (() => a as A)
   ) (a, path, child);

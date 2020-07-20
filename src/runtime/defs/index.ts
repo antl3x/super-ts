@@ -1,4 +1,4 @@
-import { Validationλ } from '@algebraic/types/Validation/Validation';
+import { Resultλ } from '@algebraic/types/Result/Result';
 export {
   Schema,
   TypeOf,
@@ -29,7 +29,7 @@ interface Checkable<A extends Schema> {
     checkInt: Check<A>;
   };
   Δ: {
-    check: (a: unknown) => Validationλ<InvalidCheck, TypeOf<A>>;
+    check: (a: unknown) => Resultλ<InvalidCheck, TypeOf<A>>;
   };
 }
 
@@ -38,13 +38,13 @@ interface CheckableWith<A extends Schema> {
     checkInt: Check<A>;
   };
   Δ: {
-    check: (a: unknown) => Validationλ<InvalidCheck, TypeOf<A>>;
+    check: (a: unknown) => Resultλ<InvalidCheck, TypeOf<A>>;
     checkWith: (a: Check<A>[]) => A;
   };
 }
 
 interface Check<A extends Schema> {
-  (a: unknown, path: string, child?: any): Validationλ<InvalidCheck, TypeOf<A>>;
+  (a: unknown, path: string, child?: any): Resultλ<InvalidCheck, TypeOf<A>>;
 }
 
 interface InvalidCheck {

@@ -9,8 +9,8 @@ import {
   Union,
 } from 'src/runtime/index';
 import { TypeOf } from '@runtime/defs';
-import { isSuccessOf } from '@algebraic/types/Validation/Functions';
-import { Validation } from '@algebraic/index';
+import { isSuccessOf } from '@algebraic/types/Result/Functions';
+import { Result } from '@algebraic/index';
 import { identity } from '@common/identity';
 
 const League = Union (
@@ -75,7 +75,7 @@ it ('Should pass with correct error return with an invalid team', () => {
   };
 
   const isTeam = Team.Δ.check (teamPayload);
-  const isTeamRes = Validation.λ.fold (identity, identity) (isTeam);
+  const isTeamRes = Result.λ.fold (identity, identity) (isTeam);
   expect (isTeamRes).toEqual ([
     {
         code: 'IS_STRING',

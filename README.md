@@ -147,18 +147,18 @@ type Player = TypeOf<typeof Player>;
 
 When you use the runtime types, we expose an API under the property `.Δ` so you can use functions available for the type.
 
-#### <a name="create" href="#L512">`check :: a -⁠> Validationλ InvalidCheck a`</a>
+#### <a name="create" href="#L512">`check :: a -⁠> Resultλ InvalidCheck a`</a>
 
 Takes an unknown payload and validates against the type. If the validation suceeds,
-we return an algebraic type called _Validationλ_ of _Sucess_ which contains the payload.
-If the check fails we return an _Validationλ_ of _Failure_ containing an _NonEmptyArrayλ_
+we return an algebraic type called _Resultλ_ of _Sucess_ which contains the payload.
+If the check fails we return an _Resultλ_ of _Failure_ containing an _NonEmptyArrayλ_
 of _InvalidCheck_ containing all the errors found on that payload.
 
 **Example**
 
 ```ts
 import { identity } from 'super-ts/common/identity';
-import { Validation } from 'super-ts/algebraic';
+import { Result } from 'super-ts/algebraic';
 
 /** other imports .. */
 
@@ -180,7 +180,7 @@ const teamInvalidPayload = {
 
 const isValidTeam = Team.Δ.check(teamInvalidPayload);
 
-const isValidTeamRes = Validation.λ.fold (identity, identity) (isValidTeam);
+const isValidTeamRes = Result.λ.fold (identity, identity) (isValidTeam);
 
 
 // isValidTeamRes = [

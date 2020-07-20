@@ -1,5 +1,5 @@
-import ValidationModule from '@algebraic/types/Validation';
-import { Validationλ } from '@algebraic/types/Validation/Validation';
+import ResultModule from '@algebraic/types/Result';
+import { Resultλ } from '@algebraic/types/Result/Result';
 import { introspect } from 'src/runtime/introspection';
 import { Checkable, InvalidCheck, Schema } from '@runtime/defs';
 import rPipe from 'ramda/src/pipe';
@@ -17,11 +17,11 @@ const suceedOrFail = <A extends (Schema & Checkable<Schema>)[]>(
   path: string,
   child: UnionΔ<A>['_']['child']
 ) => (
-  childResults: Validationλ<InvalidCheck, any>[]
-): Validationλ<InvalidCheck, UnionΔ<A>['_']['primitive']> =>
+  childResults: Resultλ<InvalidCheck, any>[]
+): Resultλ<InvalidCheck, UnionΔ<A>['_']['primitive']> =>
   childResults.some ((i) => i.λ.id === 'Success')
-    ? ValidationModule.λ.Success (a)
-    : ValidationModule.λ.Failure ([
+    ? ResultModule.λ.Success (a)
+    : ResultModule.λ.Failure ([
         {
           code: 'IS_UNION',
           message: `Expected ${introspect (

@@ -1,10 +1,10 @@
-import ValidationModule from '@algebraic/types/Validation';
+import ResultModule from '@algebraic/types/Result';
 import { sequence } from '@algebraic/common/sequence';
 import { Check, Checkable, Schema, InvalidCheck } from '@runtime/defs';
 import { introspect } from '@runtime/introspection';
 import rPipe from 'ramda/src/pipe';
 import Array, { ArrayΔ } from './Array';
-import { Validationλ } from '@algebraic/types/Validation/Validation';
+import { Resultλ } from '@algebraic/types/Result/Result';
 
 export { checkInt };
 
@@ -15,8 +15,8 @@ const isArray = <A extends Schema, IsReadOnly extends boolean>(): Check<
   ArrayΔ<A, IsReadOnly>
 > => (a, path, child) =>
   globalThis.Array.isArray (a) && a.length > 0
-    ? ValidationModule.λ.Success (a as ArrayΔ<A, IsReadOnly>['_']['primitive'])
-    : ValidationModule.λ.Failure ([
+    ? ResultModule.λ.Success (a as ArrayΔ<A, IsReadOnly>['_']['primitive'])
+    : ResultModule.λ.Failure ([
         {
           code: 'IS_ARRAY',
           message: `Expected ${introspect (
@@ -33,7 +33,7 @@ const doWithChecks = <A extends Schema, IsReadOnly extends boolean>(
   withChecks
     ? withChecks.map ((check) => check (payload, path))
     : [
-        ValidationModule.λ.Success<
+        ResultModule.λ.Success<
           InvalidCheck,
           ArrayΔ<A, IsReadOnly>['_']['primitive']
         > (payload),
@@ -47,9 +47,9 @@ const doChildChecks = <
   path: string,
   child: ArrayΔ<A, IsReadOnly>['_']['child']
 ) => (
-  withChecks: Validationλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['_']['primitive']>[]
+  withChecks: Resultλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['_']['primitive']>[]
 ) =>
-  sequence (ValidationModule) ([
+  sequence (ResultModule) ([
     ...withChecks,
     ...doChildChecksCondition (withChecks, payload, path, child),
   ]);
@@ -58,7 +58,7 @@ const doChildChecksCondition = <
   A extends Schema & Checkable<A>,
   IsReadOnly extends boolean
 >(
-  withChecks: Validationλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['_']['primitive']>[],
+  withChecks: Resultλ<InvalidCheck, ArrayΔ<A, IsReadOnly>['_']['primitive']>[],
   payload: ArrayΔ<A, IsReadOnly>['_']['primitive'],
   path: string,
   child: ArrayΔ<A, IsReadOnly>['_']['child']
@@ -76,9 +76,9 @@ const checkInt = <A extends Schema & Checkable<A>, IsReadOnly extends boolean>(
 ): Check<ArrayΔ<A, IsReadOnly>> => (a: unknown, path: string) =>
   rPipe (
     () => isArray<A, IsReadOnly> () (a, path, Array (child, isReadOnly)),
-    ValidationModule.λ.map ((res) => doWithChecks (path, withChecks) (res)),
-    ValidationModule.λ.chain ((res) =>
+    ResultModule.λ.map ((res) => doWithChecks (path, withChecks) (res)),
+    ResultModule.λ.chain ((res) =>
       doChildChecks (a as any[], path, child) (res)
     ),
-    ValidationModule.λ.map ((res) => res[0])
+    ResultModule.λ.map ((res) => res[0])
   ) ();

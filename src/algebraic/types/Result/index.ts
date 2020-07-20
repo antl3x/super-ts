@@ -4,15 +4,15 @@ import type { FunctorOf2 } from '@algebraic/defs/Functor';
 import { Failure, of, Success } from './Applicative';
 import { ap } from './Apply';
 import { map, mapU, mapFailure } from './Functor';
-import { Validation$λ } from './Validation';
+import { Result$λ } from './Result';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 import { chainU, chain } from './Chain';
 import { fold } from './Functions';
 
-type ValidationModule = ApplicativeOf2<Validation$λ> &
-  FunctorOf2<Validation$λ> &
-  ApplyOf2<Validation$λ> &
-  ChainOf2<Validation$λ> & {
+type ResultModule = ApplicativeOf2<Result$λ> &
+  FunctorOf2<Result$λ> &
+  ApplyOf2<Result$λ> &
+  ChainOf2<Result$λ> & {
     λ: {
       mapFailure: typeof mapFailure;
       Failure: typeof Failure;
@@ -21,9 +21,9 @@ type ValidationModule = ApplicativeOf2<Validation$λ> &
     };
   };
 
-const ValidationModule: ValidationModule = {
+const ResultModule: ResultModule = {
   λ: {
-    kind: Validation$λ,
+    kind: Result$λ,
     ap,
     of,
     map,
@@ -34,10 +34,10 @@ const ValidationModule: ValidationModule = {
     Success,
   },
   λU: {
-    kind: Validation$λ,
+    kind: Result$λ,
     map: mapU,
     chain: chainU,
   },
 };
 
-export default ValidationModule;
+export default ResultModule;

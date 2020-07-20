@@ -1,19 +1,19 @@
 import { AsyncEitherλ } from './AsyncEither';
-import { isFailure } from '@algebraic/types/Validation/Functions';
+import { isFailure } from '@algebraic/types/Result/Functions';
 import AsyncEitherModule from '.';
-import { Validationλ } from '@algebraic/types/Validation/Validation';
+import { Resultλ } from '@algebraic/types/Result/Result';
 import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
 import EitherModule from '../Either';
 import { Asyncλ } from '../Async/Async';
 import AsyncModule from '../Async';
 
-export { fromValidation, fold, foldUnion, tryCatch, mapLeft };
+export { fromResult, fold, foldUnion, tryCatch, mapLeft };
 
 /**
  * TODO: Add comment
  * @param p1
  */
-const fromValidation = <A, B>(p1: Validationλ<A, B>): AsyncEitherλ<NonEmptyArrayλ<A>, B> =>
+const fromResult = <A, B>(p1: Resultλ<A, B>): AsyncEitherλ<NonEmptyArrayλ<A>, B> =>
   isFailure (p1) 
     ? AsyncEitherModule.λ.Left (p1.λ.value) 
     : AsyncEitherModule.λ.Right (p1.λ.value) 
