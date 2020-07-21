@@ -7,7 +7,7 @@ import { map, mapU, mapFailure } from './Functor';
 import { Result$λ } from './Result';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 import { chainU, chain } from './Chain';
-import { fold } from './Functions';
+import { fold, isFailure, isSuccess } from './Functions';
 
 type ResultModule = ApplicativeOf2<Result$λ> &
   FunctorOf2<Result$λ> &
@@ -18,6 +18,8 @@ type ResultModule = ApplicativeOf2<Result$λ> &
       Failure: typeof Failure;
       Success: typeof Success;
       fold: typeof fold;
+      isFailure: typeof isFailure;
+      isSuccess: typeof isSuccess;
     };
   };
 
@@ -32,6 +34,8 @@ const ResultModule: ResultModule = {
     mapFailure,
     Failure,
     Success,
+    isFailure,
+    isSuccess
   },
   λU: {
     kind: Result$λ,
