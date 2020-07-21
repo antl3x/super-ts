@@ -6,7 +6,7 @@ import { ap } from './Apply';
 import { Either$λ } from './Either';
 import { map, mapU } from './Functor';
 import { chain, chainU, flatMap } from './Chain';
-import { fold, foldUnion, mapLeft } from './Functions';
+import { fold, foldUnion, mapLeft, fromResult } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 
 type EitherModule = ApplicativeOf2<Either$λ> &
@@ -20,6 +20,7 @@ type EitherModule = ApplicativeOf2<Either$λ> &
       foldUnion: typeof foldUnion;
       mapLeft: typeof mapLeft;
       flatMap: typeof flatMap;
+      fromResult: typeof fromResult;
     };
   };
 
@@ -35,7 +36,8 @@ const EitherModule: EitherModule = {
     foldUnion,
     chain,
     mapLeft,
-    flatMap
+    flatMap,
+    fromResult
   },
   λU: {
     kind: Either$λ,
