@@ -1,8 +1,10 @@
 dependencies:
   '@types/ramda': 0.27.6
+  benchmark: 2.1.4
   ramda: 0.27.0
 devDependencies:
   '@ef-carbon/tspm': 2.2.5_typescript@3.9.5
+  '@types/benchmark': 1.0.33
   '@types/jest': 25.2.3
   '@typescript-eslint/eslint-plugin': 2.34.0_2ce5ff4d4c428c35a55f8b98c167bebb
   '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@3.9.5
@@ -11,6 +13,7 @@ devDependencies:
   nodemon: 2.0.4
   scripty: 2.0.0
   ts-jest: 25.5.1_jest@25.5.4+typescript@3.9.5
+  ts-node: 8.10.2_typescript@3.9.5
   tsc-watch: 4.2.9_typescript@3.9.5
   tslib: 2.0.0
   typescript: 3.9.5
@@ -569,6 +572,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-t4CoEokHTfcyfb4hUaF9oOHu9RmmNWnm1CP0YmMqOOfClKascOmvlEM736vlqeScuGvBDsHkf8R2INd4DWreQA==
+  /@types/benchmark/1.0.33:
+    dev: true
+    resolution:
+      integrity: sha512-rG7Ieasa9UfZJnL72qiFvY9ivhEIYjCGgfcLLb5tJ/EL9+Mcxernj6W3HVCv/cOfJYuwNUwvVVhnrKl8iT8aqA==
   /@types/color-name/1.1.1:
     dev: true
     resolution:
@@ -862,6 +869,10 @@ packages:
       node: '>= 8'
     resolution:
       integrity: sha512-mM8522psRCqzV+6LhomX5wgp25YVibjh8Wj23I5RPkPppSVSjyKD2A2mBJmWGa+KN7f2D6LNh9jkBCeyLktzjg==
+  /arg/4.1.3:
+    dev: true
+    resolution:
+      integrity: sha512-58S9QDqG0Xx27YwPSt9fJxivjYl432YCwfDMfZ+71RAqUrZef7LrKQZ3LHLOwCS4FLNBplP533Zx895SeOCHvA==
   /argparse/1.0.10:
     dependencies:
       sprintf-js: 1.0.3
@@ -1044,6 +1055,13 @@ packages:
     dev: true
     resolution:
       integrity: sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
+  /benchmark/2.1.4:
+    dependencies:
+      lodash: 4.17.19
+      platform: 1.3.6
+    dev: false
+    resolution:
+      integrity: sha1-CfPeMckWQl1JjMLuVloOvzwqVik=
   /binary-extensions/2.0.0:
     dev: true
     engines:
@@ -1560,6 +1578,12 @@ packages:
       node: '>= 8.3'
     resolution:
       integrity: sha512-Hq8o7+6GaZeoFjtpgvRBUknSXNeJiCx7V9Fr94ZMljNiCr9n9L8H8aJqgWOQiDDGdyn29fRNcDdRVJ5fdyihfg==
+  /diff/4.0.2:
+    dev: true
+    engines:
+      node: '>=0.3.1'
+    resolution:
+      integrity: sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
   /doctrine/3.0.0:
     dependencies:
       esutils: 2.0.3
@@ -3320,6 +3344,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  /lodash/4.17.19:
+    dev: false
+    resolution:
+      integrity: sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
   /logform/2.2.0:
     dependencies:
       colors: 1.4.0
@@ -3882,6 +3910,10 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==
+  /platform/1.3.6:
+    dev: false
+    resolution:
+      integrity: sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==
   /pn/1.1.0:
     dev: true
     resolution:
@@ -4929,6 +4961,22 @@ packages:
       typescript: '>=3.4 <4.0'
     resolution:
       integrity: sha512-kHEUlZMK8fn8vkxDjwbHlxXRB9dHYpyzqKIGDNxbzs+Rz+ssNDSDNusEK8Fk/sDd4xE6iKoQLfFkFVaskmTJyw==
+  /ts-node/8.10.2_typescript@3.9.5:
+    dependencies:
+      arg: 4.1.3
+      diff: 4.0.2
+      make-error: 1.3.6
+      source-map-support: 0.5.19
+      typescript: 3.9.5
+      yn: 3.1.1
+    dev: true
+    engines:
+      node: '>=6.0.0'
+    hasBin: true
+    peerDependencies:
+      typescript: '>=2.7'
+    resolution:
+      integrity: sha512-ISJJGgkIpDdBhWVu3jufsWpK3Rzo7bdiIXJjQc0ynKxVOVcg2oIrf2H2cejminGrptVc6q6/uynAHNCuWGbpVA==
   /ts-toolbelt/6.9.9:
     dev: false
     resolution:
@@ -5366,18 +5414,27 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-92O1HWEjw27sBfgmXiixJWT5hRBp2eobqXicLtPBIDBhYB+1HpwZlXmbW2luivBJHBzki+7VyCLRtAkScbTBQA==
+  /yn/3.1.1:
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-Ux4ygGWsu2c7isFWe8Yu1YluJmqVhxqK2cLXNQA5AcC3QfbGNpM7fu0Y8b/z16pXLnFxZYvWhd3fhBY9DLmC6Q==
 specifiers:
   '@ef-carbon/tspm': ^2.2.5
+  '@types/benchmark': ^1.0.33
   '@types/jest': ^25.2.1
   '@types/ramda': ^0.27.4
   '@typescript-eslint/eslint-plugin': ^2.30.0
   '@typescript-eslint/parser': ^2.30.0
+  benchmark: ^2.1.4
   eslint: ^6.8.0
   jest: ^25.5.3
   nodemon: ^2.0.4
   ramda: ^0.27.0
   scripty: ^2.0.0
   ts-jest: ^25.4.0
+  ts-node: ^8.10.2
   tsc-watch: ^4.2.9
   tslib: ^2.0.0
   typescript: ^3.9.5
