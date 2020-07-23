@@ -1,6 +1,6 @@
-import { ApplicativeOf1, ApplicativeOf2 } from "@algebraic/defs/Applicative";
-import { ApplyOf1, ApplyOf2 } from "@algebraic/defs/Apply";
-import { Kind1, Kind2, Types1, Types2 } from "@hkt";
+import { ApplicativeOf1, ApplicativeOf2 } from '@algebraic/defs/Applicative';
+import { ApplyOf1, ApplyOf2 } from '@algebraic/defs/Apply';
+import { Kind1, Kind2, Types1, Types2 } from '@hkt';
 
 /**
  * TODO: Add Comment
@@ -8,13 +8,13 @@ import { Kind1, Kind2, Types1, Types2 } from "@hkt";
 
 function sequenceTuple<A extends Types2>(
   p1: ApplicativeOf2<A> & ApplyOf2<A>
-): <B, Z extends Array<Kind2<A, B, any>>>(
-  ...p2: Z & { 0: Kind2<A, B, any> }
+): <Z extends Array<Kind2<A, any, any>>>(
+  ...p2: Z & { 0: Kind2<A, any, any> }
 ) => Kind2<
   A,
-  B,
+  Z extends Array<Kind2<A, infer B, any>> ? B : never,
   {
-    [K in keyof Z]: [Z[K]] extends [Kind2<A, B, infer X>] ? X : never;
+    [K in keyof Z]: [Z[K]] extends [Kind2<A, infer B, infer X>] ? X : never;
   }
 >;
 
@@ -29,22 +29,20 @@ function sequenceTuple<A extends Types1>(
 
 function sequenceTuple(adtModule: ApplicativeOf1<any> & ApplyOf1<any>) {
   return function (...adtInstances: Kind1<any, any>[]): any {
-    return adtInstances.reduce(
-      (pv, cv) => adtModule.λ.ap(pv)(cv),
-      adtModule.λ.of(toTuple(adtInstances.length, adtModule, []))
+    return adtInstances.reduce (
+      (pv, cv) => adtModule.λ.ap (pv) (cv),
+      adtModule.λ.of (constructFn (adtInstances.length, []))
     );
   };
 }
+    
+const constructFn = (currentSize: number, acc: any[]) => {
+  return function (x: unknown) {
+    return currentSize > 1
+    ? constructFn (currentSize - 1,  [...acc, x])
+    : [...acc, x];
+  }
 
-const toTuple = (
-  totalItems: number,
-  adtModule: ApplyOf1<any> & ApplicativeOf1<any>,
-  prevValue: any[]
-) => (x: unknown): any =>
-  totalItems - 1 === 0
-    ? prevValue[0]["λ"]
-      ? sequenceTuple(adtModule)(...(prevValue.concat(x) as any))
-      : prevValue.concat(x)
-    : toTuple(totalItems - 1, adtModule, prevValue.concat(x));
+}
 
 export { sequenceTuple };
