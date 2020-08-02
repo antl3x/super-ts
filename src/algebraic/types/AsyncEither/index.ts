@@ -22,6 +22,7 @@ type AsyncEitherModule = {
     tryCatch: typeof tryCatch;
     mapLeft: typeof mapLeft;
     chainStrict: typeof chainStrict;
+    chain: typeof chain;
     bindTo: typeof bindTo;
     bindToStrict: typeof bindToStrict;
     bindOf: typeof bindOf;
