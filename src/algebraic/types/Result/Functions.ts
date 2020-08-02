@@ -1,7 +1,11 @@
 import type { Failureλ, Successλ, Resultλ } from './Result';
 import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
+import { pipe } from '@algebraic/common/pipe';
+import { chain } from './Chain';
+import { map } from './Functor';
+import { bindTo as cBindTo } from '@algebraic/common/bindTo'
 
-export { isFailure, isSuccess, isSuccessOf, fold };
+export { isFailure, isSuccess, isSuccessOf, fold, bindTo, bindToStrict, bindOf };
 
 /**
  * TODO: Add comment
@@ -33,3 +37,57 @@ const fold = <A, B, C>(
   onSucess: (b: B) => C
 ) => (p1: Resultλ<A, B>) =>
   isFailure (p1) ? onFailure (p1.λ.value) : onSucess (p1.λ.value);
+
+  /**
+ * TODO: Add comment
+ */
+const bindTo = <Property extends string, Previous, A, B>(
+  p1: Exclude<Property, keyof Previous>,
+  p2: (a: Previous) => Resultλ<A, B>
+) => <C>(
+  p3: Resultλ<C, Previous>
+): Resultλ<
+  A | C,
+  {
+    [K in keyof Previous | Property]: K extends keyof Previous
+      ? Previous[K]
+      : B;
+  }
+> =>
+  pipe (
+    () => p3,
+    chain ((a) =>
+      pipe (
+        () => p2 (a),
+        map ((b) => cBindTo (a, p1, b))
+      )
+    )
+  );
+
+/**
+ * TODO: Add comment
+ */
+const bindToStrict = <Property extends string, Previous, A, B>(
+  p1: Exclude<Property, keyof Previous>,
+  p2: (a: Previous) => Resultλ<A, B>
+) => (
+  p3: Resultλ<A, Previous>
+): Resultλ<
+  A,
+  {
+    [K in keyof Previous | Property]: K extends keyof Previous
+      ? Previous[K]
+      : B;
+  }
+> => bindTo (p1, p2) (p3);
+
+/**
+ * TODO: Add comment
+ */
+const bindOf = <Property extends string, Value, A>(p1: Property) => (
+  p2: Resultλ<A, Value>
+): Resultλ<A, { [K in Property]: Value }> =>
+  pipe (
+    () => p2,
+    map ((a) => cBindTo ({}, p1, a))
+  );
