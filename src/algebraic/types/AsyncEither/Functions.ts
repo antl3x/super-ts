@@ -6,8 +6,12 @@ import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
 import EitherModule from '../Either';
 import { Asyncλ } from '../Async/Async';
 import AsyncModule from '../Async';
+import { pipe } from '@algebraic/common/pipe';
+import { chain } from './Chain';
+import { map } from './Functor';
+import { bindTo as cBindTo } from '@algebraic/common/bindTo'
 
-export { fromResult, fold, foldUnion, tryCatch, mapLeft };
+export { fromResult, fold, foldUnion, tryCatch, mapLeft, bindTo, bindToStrict, bindOf };
 
 /**
  * TODO: Add comment
@@ -47,3 +51,56 @@ const tryCatch = <A, B>(p1: () => Promise<B>, onRejected: (reason: unknown) => A
 const mapLeft = <A, B, C>(p1: (a: A) => C) => (p2: AsyncEitherλ<A, B>): AsyncEitherλ<C, B> =>
   AsyncModule.λU.map (EitherModule.λ.mapLeft (p1), p2)
 
+/**
+ * TODO: Add comment
+ */
+const bindTo = <Property extends string, Previous, A, B>(
+  p1: Exclude<Property, keyof Previous>,
+  p2: (a: Previous) => AsyncEitherλ<A, B>
+) => <C>(
+  p3: AsyncEitherλ<C, Previous>
+): AsyncEitherλ<
+  A | C,
+  {
+    [K in keyof Previous | Property]: K extends keyof Previous
+      ? Previous[K]
+      : B;
+  }
+> =>
+  pipe (
+    () => p3,
+    chain ((a) =>
+      pipe (
+        () => p2 (a),
+        map ((b) => cBindTo (a, p1, b))
+      )
+    )
+  );
+
+  /**
+ * TODO: Add comment
+ */
+const bindToStrict = <Property extends string, Previous, A, B>(
+  p1: Exclude<Property, keyof Previous>,
+  p2: (a: Previous) => AsyncEitherλ<A, B>
+) => (
+  p3: AsyncEitherλ<A, Previous>
+): AsyncEitherλ<
+  A,
+  {
+    [K in keyof Previous | Property]: K extends keyof Previous
+      ? Previous[K]
+      : B;
+  }
+> => bindTo (p1, p2) (p3);
+
+/**
+ * TODO: Add comment
+ */
+const bindOf = <Property extends string, Value, A>(p1: Property) => (
+  p2: AsyncEitherλ<A, Value>
+): AsyncEitherλ<A, { [K in Property]: Value }> =>
+  pipe (
+    () => p2,
+    map ((a) => cBindTo ({}, p1, a))
+  );

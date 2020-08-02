@@ -4,9 +4,9 @@ import type { FunctorOf2 } from '@algebraic/defs/Functor';
 import { Left, of, Right } from './Applicative';
 import { ap } from './Apply';
 import { map, mapU } from './Functor';
-import { chain, chainU, flatMap } from './Chain';
+import { chain, chainU, chainStrict } from './Chain';
 import { AsyncEither$λ } from './AsyncEither';
-import { fromResult, tryCatch, foldUnion } from './Functions';
+import { fromResult, tryCatch, foldUnion, bindTo, bindToStrict, bindOf } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 import { mapLeft } from './Functions';
@@ -21,7 +21,10 @@ type AsyncEitherModule = {
     of: typeof of;
     tryCatch: typeof tryCatch;
     mapLeft: typeof mapLeft;
-    flatMap: typeof flatMap;
+    chainStrict: typeof chainStrict;
+    bindTo: typeof bindTo;
+    bindToStrict: typeof bindToStrict;
+    bindOf: typeof bindOf;
   };
 } &
   ApplicativeOf2<AsyncEither$λ> &
@@ -43,7 +46,10 @@ const AsyncEitherModule: AsyncEitherModule = {
     tryCatch,
     chain,
     mapLeft,
-    flatMap
+    chainStrict,
+    bindTo,
+    bindToStrict,
+    bindOf
   },
   λU: {
     kind: AsyncEither$λ,
