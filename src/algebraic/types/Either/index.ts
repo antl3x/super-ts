@@ -5,8 +5,8 @@ import { of, Right, Left } from './Applicative';
 import { ap } from './Apply';
 import { Either$λ } from './Either';
 import { map, mapU } from './Functor';
-import { chain, chainU, flatMap } from './Chain';
-import { fold, foldUnion, mapLeft, fromResult } from './Functions';
+import { chain, chainU, chainStrict, chainStrictU } from './Chain';
+import { fold, foldUnion, mapLeft, fromResult, bindTo, bindToStrict, bindOf } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 
 type EitherModule = ApplicativeOf2<Either$λ> &
@@ -19,8 +19,14 @@ type EitherModule = ApplicativeOf2<Either$λ> &
       fold: typeof fold;
       foldUnion: typeof foldUnion;
       mapLeft: typeof mapLeft;
-      flatMap: typeof flatMap;
+      chainStrict: typeof chainStrict;
       fromResult: typeof fromResult;
+      bindTo: typeof bindTo;
+      bindToStrict: typeof bindToStrict;
+      bindOf: typeof bindOf;
+    };
+    λU: {
+      chainStrict: typeof chainStrictU;
     };
   };
 
@@ -35,14 +41,18 @@ const EitherModule: EitherModule = {
     fold,
     foldUnion,
     chain,
+    bindTo,
+    bindToStrict,
+    bindOf,
     mapLeft,
-    flatMap,
+    chainStrict,
     fromResult
   },
   λU: {
     kind: Either$λ,
     map: mapU,
-    chain: chainU
+    chain: chainU,
+    chainStrict: chainStrictU
   },
 };
 

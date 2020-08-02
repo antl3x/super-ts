@@ -3,8 +3,12 @@ import EitherModule from '.';
 import { Resultλ } from '../Result/Result';
 import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
 import ResultModule from '../Result';
+import { pipe } from '@algebraic/common/pipe';
+import { chain } from './Chain';
+import { map } from './Functor';
+import { bindTo as cBindTo } from '@algebraic/common/bindTo'
 
-export { isLeft, isRight, fold, foldUnion, mapLeft, mapLeftU, fromResult };
+export { isLeft, isRight, fold, foldUnion, mapLeft, mapLeftU, fromResult, bindTo, bindToStrict, bindOf };
 
 /**
  * TODO: Add comment
@@ -59,4 +63,58 @@ const mapLeftU = <A, B, C>(p1: (a: A) => C, p2: Eitherλ<A, B>): Eitherλ<C, B> 
 const fromResult = <A, B>(p1: Resultλ<A, B>): Eitherλ<NonEmptyArrayλ<A>, B> =>
 ResultModule.λ.isFailure (p1) 
   ? EitherModule.λ.Left (p1.λ.value) 
-  : EitherModule.λ.Right (p1.λ.value) 
+  : EitherModule.λ.Right (p1.λ.value)
+
+/**
+ * TODO: Add comment
+ */
+const bindTo = <Property extends string, Previous, A, B>(
+  p1: Exclude<Property, keyof Previous>,
+  p2: (a: Previous) => Eitherλ<A, B>
+) => <C>(
+  p3: Eitherλ<C, Previous>
+): Eitherλ<
+  A | C,
+  {
+    [K in keyof Previous | Property]: K extends keyof Previous
+      ? Previous[K]
+      : B;
+  }
+> =>
+  pipe (
+    () => p3,
+    chain ((a) =>
+      pipe (
+        () => p2 (a),
+        map ((b) => cBindTo (a, p1, b))
+      )
+    )
+  );
+
+/**
+ * TODO: Add comment
+ */
+const bindToStrict = <Property extends string, Previous, A, B>(
+  p1: Exclude<Property, keyof Previous>,
+  p2: (a: Previous) => Eitherλ<A, B>
+) => (
+  p3: Eitherλ<A, Previous>
+): Eitherλ<
+  A,
+  {
+    [K in keyof Previous | Property]: K extends keyof Previous
+      ? Previous[K]
+      : B;
+  }
+> => bindTo (p1, p2) (p3);
+
+/**
+ * TODO: Add comment
+ */
+const bindOf = <Property extends string, Value, A>(p1: Property) => (
+  p2: Eitherλ<A, Value>
+): Eitherλ<A, { [K in Property]: Value }> =>
+  pipe (
+    () => p2,
+    map ((a) => cBindTo ({}, p1, a))
+  );
