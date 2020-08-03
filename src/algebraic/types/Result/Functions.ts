@@ -4,6 +4,7 @@ import { pipe } from '@algebraic/common/pipe';
 import { chain } from './Chain';
 import { map } from './Functor';
 import { bindTo as cBindTo } from '@algebraic/common/bindTo'
+import { bindOf as cBindOf } from '@algebraic/common/bindOf'
 
 export { isFailure, isSuccess, isSuccessOf, fold, bindTo, bindToStrict, bindOf };
 
@@ -55,10 +56,10 @@ const bindTo = <Property extends string, Previous, A, B>(
   }
 > =>
   pipe (
-    () => p3,
+    p3,
     chain ((a) =>
       pipe (
-        () => p2 (a),
+        p2 (a),
         map ((b) => cBindTo (a, p1, b))
       )
     )
@@ -88,6 +89,6 @@ const bindOf = <Property extends string, Value, A>(p1: Property) => (
   p2: Resultλ<A, Value>
 ): Resultλ<A, { [K in Property]: Value }> =>
   pipe (
-    () => p2,
-    map ((a) => cBindTo ({}, p1, a))
+    p2,
+    map ((a) => cBindOf (p1, a))
   );

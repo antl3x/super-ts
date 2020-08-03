@@ -8,8 +8,9 @@ import { Asyncλ } from '../Async/Async';
 import AsyncModule from '../Async';
 import { pipe } from '@algebraic/common/pipe';
 import { chain } from './Chain';
-import { map } from './Functor';
+import { map, mapU } from './Functor';
 import { bindTo as cBindTo } from '@algebraic/common/bindTo'
+import { bindOf as cBindOf } from '@algebraic/common/bindOf'
 
 export { fromResult, fold, foldUnion, tryCatch, mapLeft, bindTo, bindToStrict, bindOf };
 
@@ -68,10 +69,10 @@ const bindTo = <Property extends string, Previous, A, B>(
   }
 > =>
   pipe (
-    () => p3,
+    p3,
     chain ((a) =>
       pipe (
-        () => p2 (a),
+        p2 (a),
         map ((b) => cBindTo (a, p1, b))
       )
     )
@@ -100,7 +101,5 @@ const bindToStrict = <Property extends string, Previous, A, B>(
 const bindOf = <Property extends string, Value, A>(p1: Property) => (
   p2: AsyncEitherλ<A, Value>
 ): AsyncEitherλ<A, { [K in Property]: Value }> =>
-  pipe (
-    () => p2,
-    map ((a) => cBindTo ({}, p1, a))
-  );
+  
+    mapU (a => cBindOf (p1, a), p2);

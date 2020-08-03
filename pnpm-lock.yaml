@@ -1,6 +1,5 @@
 dependencies:
   '@types/ramda': 0.27.6
-  benchmark: 2.1.4
   ramda: 0.27.0
 devDependencies:
   '@ef-carbon/tspm': 2.2.5_typescript@3.9.5
@@ -8,6 +7,7 @@ devDependencies:
   '@types/jest': 25.2.3
   '@typescript-eslint/eslint-plugin': 2.34.0_2ce5ff4d4c428c35a55f8b98c167bebb
   '@typescript-eslint/parser': 2.34.0_eslint@6.8.0+typescript@3.9.5
+  benchmark: 2.1.4
   eslint: 6.8.0
   jest: 25.5.4
   nodemon: 2.0.4
@@ -1059,7 +1059,7 @@ packages:
     dependencies:
       lodash: 4.17.19
       platform: 1.3.6
-    dev: false
+    dev: true
     resolution:
       integrity: sha1-CfPeMckWQl1JjMLuVloOvzwqVik=
   /binary-extensions/2.0.0:
@@ -3345,7 +3345,7 @@ packages:
     resolution:
       integrity: sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
   /lodash/4.17.19:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
   /logform/2.2.0:
@@ -3911,7 +3911,7 @@ packages:
     resolution:
       integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==
   /platform/1.3.6:
-    dev: false
+    dev: true
     resolution:
       integrity: sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==
   /pn/1.1.0:
