@@ -23,18 +23,15 @@ const suceedOrFail = <A extends (Schema & Checkable<Schema>)[]>(
 ): Resultλ<InvalidCheck, UnionΔ<A>['_']['primitive']> =>
   childResults.some ((i) => i.λ.id === 'Success')
     ? ResultModule.λ.Success (a)
-    : pipe (
-      sequence (ResultModule) ([...childResults, ResultModule.λ.Failure ([
+    : ResultModule.λ.Failure ([
         {
           code: 'IS_UNION',
           message: `Expected ${introspect (
             Union (...child)
-          )} but found (${a?.toString()} :: ${typeof a})`,
+          )} but found (${typeof a === 'object' ? JSON.stringify (a) : a} :: ${typeof a})`,
           path,
         },
-      ])]),
-      ResultModule.λ.map (x => x[0])
-    )
+      ])
     ;
 
 const checkInt = <A extends (Schema & Checkable<Schema>)[]>(
