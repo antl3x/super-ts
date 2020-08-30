@@ -88,6 +88,26 @@ it ('Should pass with correct error return with an invalid team', () => {
         path: 'yearFounded'
     },
     {
+      code: 'IS_LITERAL',
+      message: 'Expected literal (NFL :: string) but found (Soccer :: string)',
+      path: 'league'
+    },
+    {
+      code: 'IS_LITERAL',
+      message: 'Expected literal (MLB :: string) but found (Soccer :: string)',
+      path: 'league'
+    },
+    {
+      code: 'IS_LITERAL',
+      message: 'Expected literal (NBA :: string) but found (Soccer :: string)',
+      path: 'league'
+    },
+    {
+      code: 'IS_LITERAL',
+      message: 'Expected literal (WNBA :: string) but found (Soccer :: string)',
+      path: 'league'
+    },
+    {
       code: 'IS_UNION',
       message: 'Expected (NFL | MLB | NBA | WNBA) but found (Soccer :: string)',
       path: 'league'

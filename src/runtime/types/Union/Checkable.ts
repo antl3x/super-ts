@@ -4,6 +4,8 @@ import { introspect } from 'src/runtime/introspection';
 import { Checkable, InvalidCheck, Schema } from '@runtime/defs';
 import rPipe from 'ramda/src/pipe';
 import Union, { UnionΔ } from './Union';
+import { pipe } from '@algebraic/common/pipe';
+import { sequence } from '@algebraic/common/sequence';
 export { checkInt };
 
 const doChildChecks = <A extends (Schema & Checkable<Schema>)[]>(
@@ -21,15 +23,19 @@ const suceedOrFail = <A extends (Schema & Checkable<Schema>)[]>(
 ): Resultλ<InvalidCheck, UnionΔ<A>['_']['primitive']> =>
   childResults.some ((i) => i.λ.id === 'Success')
     ? ResultModule.λ.Success (a)
-    : ResultModule.λ.Failure ([
+    : pipe (
+      sequence (ResultModule) ([...childResults, ResultModule.λ.Failure ([
         {
           code: 'IS_UNION',
           message: `Expected ${introspect (
             Union (...child)
-          )} but found (${a} :: ${typeof a})`,
+          )} but found (${a?.toString()} :: ${typeof a})`,
           path,
         },
-      ]);
+      ])]),
+      ResultModule.λ.map (x => x[0])
+    )
+    ;
 
 const checkInt = <A extends (Schema & Checkable<Schema>)[]>(
   child: UnionΔ<A>['_']['child']
