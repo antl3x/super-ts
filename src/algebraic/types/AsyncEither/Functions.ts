@@ -11,8 +11,10 @@ import { chain } from './Chain';
 import { map, mapU } from './Functor';
 import { bindTo as cBindTo } from '@algebraic/common/bindTo'
 import { bindOf as cBindOf } from '@algebraic/common/bindOf'
+import { Eitherλ } from '../Either/Either';
+import { isLeft } from '../Either/Functions';
 
-export { fromResult, fold, foldUnion, tryCatch, mapLeft, bindTo, bindToStrict, bindOf };
+export { fromResult, fromEither, fold, foldUnion, tryCatch, mapLeft, bindTo, bindToStrict, bindOf };
 
 /**
  * TODO: Add comment
@@ -20,6 +22,15 @@ export { fromResult, fold, foldUnion, tryCatch, mapLeft, bindTo, bindToStrict, b
  */
 const fromResult = <A, B>(p1: Resultλ<A, B>): AsyncEitherλ<NonEmptyArrayλ<A>, B> =>
   isFailure (p1) 
+    ? AsyncEitherModule.λ.Left (p1.λ.value) 
+    : AsyncEitherModule.λ.Right (p1.λ.value)
+
+/**
+ * TODO: Add comment
+ * @param p1
+ */
+const fromEither = <A, B>(p1: Eitherλ<A, B>): AsyncEitherλ<A, B> =>
+  isLeft (p1) 
     ? AsyncEitherModule.λ.Left (p1.λ.value) 
     : AsyncEitherModule.λ.Right (p1.λ.value) 
 

@@ -6,7 +6,7 @@ import { ap } from './Apply';
 import { map, mapU } from './Functor';
 import { chain, chainU, chainStrict } from './Chain';
 import { AsyncEither$λ } from './AsyncEither';
-import { fromResult, tryCatch, foldUnion, bindTo, bindToStrict, bindOf } from './Functions';
+import { fromResult, tryCatch, foldUnion, bindTo, bindToStrict, bindOf, fromEither } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 import { mapLeft } from './Functions';
@@ -16,6 +16,7 @@ type AsyncEitherModule = {
     Left: typeof Left;
     Right: typeof Right;
     fromResult: typeof fromResult;
+    fromEither: typeof fromEither;
     fold: typeof fold;
     foldUnion: typeof foldUnion;
     of: typeof of;
@@ -42,6 +43,7 @@ const AsyncEitherModule: AsyncEitherModule = {
     Left,
     Right,
     fromResult,
+    fromEither,
     fold,
     foldUnion,
     tryCatch,
