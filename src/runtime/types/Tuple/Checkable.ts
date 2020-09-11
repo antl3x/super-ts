@@ -13,7 +13,7 @@ const buildPath = (indice: number, parentPath?: string) =>
 const isTuple = <A extends (Schema & Checkable<Schema>)[]>(): Check<
   TupleΔ<A>
 > => (a, path, child) =>
-  globalThis.Array.isArray (a) && a.length === child.length
+  globalThis.Array.isArray (a) && globalThis.Array.isArray (child) &&  a.length === child.length
     ? ResultModule.λ.Success (a as any)
     : ResultModule.λ.Failure ([
         {
