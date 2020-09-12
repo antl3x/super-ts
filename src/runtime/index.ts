@@ -7,3 +7,4 @@ export { default as Record } from '@runtime/types/Record/Record';
 export { default as String } from '@runtime/types/String/String';
 export { default as Tuple } from '@runtime/types/Tuple/Tuple';
 export { default as Union } from '@runtime/types/Union/Union';
+export { default as Intersect } from '@runtime/types/Intersect/Intersect';
