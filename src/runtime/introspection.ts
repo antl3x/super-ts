@@ -1,6 +1,7 @@
 import { ArrayΔ$ } from '@runtime/types/Array/Array';
 import { LiteralΔ$ } from '@runtime/types/Literal/Literal';
 import { UnionΔ$, UnionΔ } from '@runtime/types/Union/Union';
+import { IntersectΔ$, IntersectΔ } from '@runtime/types/Intersect/Intersect';
 import { Schema, Checkable } from '@runtime/defs';
 import { RecordΔ, RecordΔ$ } from '@runtime/types/Record/Record';
 import { TupleΔ$, TupleΔ } from '@runtime/types/Tuple/Tuple';
@@ -12,6 +13,7 @@ const introspect = (a: any): string => {
   if (a?._.type === ArrayΔ$) return introspectArray (a);
   if (a?._.type === LiteralΔ$) return introspectLiteral (a);
   if (a?._.type === UnionΔ$) return introspectUnion (a);
+  if (a?._.type === IntersectΔ$) return introspectIntersect (a);
   if (a?._.type === RecordΔ$) return introspectRecord (a);
   if (a?._.type === TupleΔ$) return introspectTuple (a);
   if (a?._.type === PartialΔ$) return introspectPartial (a);
@@ -26,6 +28,10 @@ const introspectLiteral = (a: any) => `${a._.child}`;
 const introspectUnion = <A extends (Schema & Checkable<Schema>)[]>(
   a: UnionΔ<A>
 ) => `(${a._.child.map (introspect).join (' | ')})`;
+
+const introspectIntersect = <A extends (Schema & Checkable<Schema>)[]>(
+  a: UnionΔ<A>
+) => `(${a._.child.map (introspect).join (' & ')})`;
 
 const introspectRecord = (a: RecordΔ<{ [key: string]: Schema }>) =>
   `{ ${Object.keys (a._.child)
