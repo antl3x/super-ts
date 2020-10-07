@@ -7,7 +7,7 @@ export { Success as of, Success, Failure };
 /**
  * TODO: Add comment
  */
-const Success = <A = unknown, B = unknown>(p1: B): Resultλ<A, B> => ({
+const Success = <A = never, B = never>(p1: B): Resultλ<A, B> => ({
   λ: {
     id: 'Success',
     kind: Result$λ,
@@ -19,7 +19,7 @@ const Success = <A = unknown, B = unknown>(p1: B): Resultλ<A, B> => ({
 /**
  * TODO: Add comment
  */
-const Failure = <A = unknown, B = unknown>(
+const Failure = <A = never, B = never>(
   p1: NonEmptyArrayλ<A>
 ): Resultλ<A, B> => ({
   λ: {

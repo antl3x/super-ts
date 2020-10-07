@@ -7,8 +7,8 @@ const Result$λ = 'Result';
 type Result$λ = typeof Result$λ;
 type Resultλ<A, B> = Failureλ<A> | Successλ<B>;
 
-declare module  '../../../hkt' {
-  interface Type2Kind2<A = unknown, B = unknown> {
+declare module '../../../hkt' {
+  interface Type2Kind2<A = never, B = never> {
     readonly [Result$λ]: Resultλ<A, B>;
   }
 }
