@@ -1,63 +1,63 @@
 {
-	"name": "super-ts",
-	"version": "1.5.1",
-	"description": "Typescript functional programming library inspired by Haskell and PureScript providing both runtime type checking and functional algebraic data types.",
-	"main": "cjs/index.js",
-	"module": "esm/index.mjs",
-	"files": [
-		"cjs",
-		"esm"
-	],
-	"scripts": {
-		"test": "scripty",
-		"test:watch": "scripty",
-		"test:performance": "scripty",
-		"build": "scripty",
-		"build:watch": "scripty",
-		"prepublish": "pnpm run build && pnpm run test"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/nthypes/super-ts.git"
-	},
-	"keywords": [
-		"functional programming",
-		"fantasy-land",
-		"static-land",
-		"fp-ts",
-		"io-ts",
-		"runtypes",
-		"purescript",
-		"haskell"
-	],
-	"author": "Antonio Moura (nthypes)",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/nthypes/super-ts/issues"
-	},
-	"homepage": "https://github.com/nthypes/super-ts#readme",
-	"devDependencies": {
-		"@ef-carbon/tspm": "^2.2.5",
-		"@types/benchmark": "^1.0.33",
-		"@types/jest": "^25.2.1",
-		"@typescript-eslint/eslint-plugin": "^2.30.0",
-		"@typescript-eslint/parser": "^2.30.0",
-		"benchmark": "^2.1.4",
-		"eslint": "^6.8.0",
-		"jest": "^25.5.3",
-		"nodemon": "^2.0.4",
-		"scripty": "^2.0.0",
-		"ts-jest": "^25.4.0",
-		"ts-node": "^8.10.2",
-		"tsc-watch": "^4.2.9",
-		"tslib": "^2.0.0",
-		"typescript": "^3.9.5"
-	},
-	"scripty": {
-		"silence": true
-	},
-	"dependencies": {
-		"@types/ramda": "^0.27.4",
-		"ramda": "^0.27.0"
-	}
+  "name": "super-ts",
+  "version": "1.6.0",
+  "description": "Typescript functional programming library inspired by Haskell and PureScript providing both runtime type checking and functional algebraic data types.",
+  "main": "cjs/index.js",
+  "module": "esm/index.mjs",
+  "files": [
+    "cjs",
+    "esm"
+  ],
+  "scripts": {
+    "test": "scripty",
+    "test:watch": "scripty",
+    "test:performance": "scripty",
+    "build": "scripty",
+    "build:watch": "scripty",
+    "prepublish": "pnpm run build && pnpm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nthypes/super-ts.git"
+  },
+  "keywords": [
+    "functional programming",
+    "fantasy-land",
+    "static-land",
+    "fp-ts",
+    "io-ts",
+    "runtypes",
+    "purescript",
+    "haskell"
+  ],
+  "author": "Antonio Moura (nthypes)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nthypes/super-ts/issues"
+  },
+  "homepage": "https://github.com/nthypes/super-ts#readme",
+  "devDependencies": {
+    "@ef-carbon/tspm": "^2.2.5",
+    "@types/benchmark": "^1.0.33",
+    "@types/jest": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "benchmark": "^2.1.4",
+    "eslint": "^6.8.0",
+    "jest": "^25.5.3",
+    "nodemon": "^2.0.4",
+    "scripty": "^2.0.0",
+    "ts-jest": "^25.4.0",
+    "ts-node": "^8.10.2",
+    "tsc-watch": "^4.2.9",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.5"
+  },
+  "scripty": {
+    "silence": true
+  },
+  "dependencies": {
+    "@types/ramda": "^0.27.4",
+    "ramda": "^0.27.0"
+  }
 }
