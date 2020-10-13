@@ -18,6 +18,7 @@ export {
   fromResult,
   fromEither,
   fold,
+  foldStrict,
   tryCatch,
   mapFailure,
   bindTo,
@@ -47,7 +48,17 @@ const fromEither = <A, B>(p1: Eitherλ<A, B>): AsyncResultλ<A, B> =>
  * TODO: Add comment
  * @param p1
  */
-const fold = <A, B, C>(
+const fold = <A, B, C, D>(
+  onLeft: (a: NonEmptyArrayλ<A>) => C,
+  onRight: (b: B) => C
+) => (p1: AsyncResultλ<A, B>): Asyncλ<C | D> => () =>
+  p1 ().then (Result.λ.fold (onLeft, onRight));
+
+/**
+ * TODO: Add comment
+ * @param p1
+ */
+const foldStrict = <A, B, C>(
   onLeft: (a: NonEmptyArrayλ<A>) => C,
   onRight: (b: B) => C
 ) => (p1: AsyncResultλ<A, B>): Asyncλ<C> => () =>
