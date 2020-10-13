@@ -3,10 +3,18 @@ import { NonEmptyArrayλ } from '@algebraic/types/NonEmptyArray/NonEmptyArray';
 import { pipe } from '@algebraic/common/pipe';
 import { chain } from './Chain';
 import { map } from './Functor';
-import { bindTo as cBindTo } from '@algebraic/common/bindTo'
-import { bindOf as cBindOf } from '@algebraic/common/bindOf'
+import { bindTo as cBindTo } from '@algebraic/common/bindTo';
+import { bindOf as cBindOf } from '@algebraic/common/bindOf';
 
-export { isFailure, isSuccess, isSuccessOf, fold, bindTo, bindToStrict, bindOf };
+export {
+  isFailure,
+  isSuccess,
+  isSuccessOf,
+  fold,
+  bindTo,
+  bindToStrict,
+  bindOf,
+};
 
 /**
  * TODO: Add comment
@@ -33,13 +41,23 @@ const isSuccessOf = <A, B>(p1: Resultλ<A, B>, p2: any): p1 is Successλ<B> =>
  * TODO: Add comment
  * @param p1
  */
-const fold = <A, B, C>(
+const fold = <A, B, C, D>(
+  onFailure: (a: NonEmptyArrayλ<A>) => C,
+  onSucess: (b: B) => D
+) => (p1: Resultλ<A, B>) =>
+  isFailure (p1) ? onFailure (p1.λ.value) : onSucess (p1.λ.value);
+
+/**
+ * TODO: Add comment
+ * @param p1
+ */
+const foldStrict = <A, B, C>(
   onFailure: (a: NonEmptyArrayλ<A>) => C,
   onSucess: (b: B) => C
 ) => (p1: Resultλ<A, B>) =>
   isFailure (p1) ? onFailure (p1.λ.value) : onSucess (p1.λ.value);
 
-  /**
+/**
  * TODO: Add comment
  */
 const bindTo = <Property extends string, Previous, A, B>(
