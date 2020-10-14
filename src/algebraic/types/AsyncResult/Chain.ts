@@ -44,7 +44,7 @@ const chainU = <A, B, C, D>(
   p2: AsyncResultλ<D, B>
 ): AsyncResultλ<A | D, C> =>
   AsyncModule.λU.chain (
-    ResultModule.λ.fold<D, B, AsyncResultλ<D | A, C>> (
+    ResultModule.λ.fold<D, B, AsyncResultλ<D | A, C>, AsyncResultλ<D | A, C>> (
       AsyncResultModule.λ.Failure,
       p1
     ),
