@@ -12,7 +12,7 @@ export { bindTo, bindOf };
  */
 const bindTo = <Property extends string, Previous, A>(
   p1: Exclude<Property, keyof Previous>,
-  p2: (a: Previous) => Asyncλ<A>
+  p2: <Param extends Previous>(a: Param) => Asyncλ<A>
 ) => (
   p3: Asyncλ<Previous>
 ): Asyncλ<

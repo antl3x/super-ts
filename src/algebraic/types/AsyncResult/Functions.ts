@@ -49,8 +49,8 @@ const fromEither = <A, B>(p1: Eitherλ<A, B>): AsyncResultλ<A, B> =>
  * @param p1
  */
 const fold = <A, B, C, D>(
-  onLeft: (a: NonEmptyArrayλ<A>) => C | D,
-  onRight: (b: B) => D | C
+  onLeft: (a: NonEmptyArrayλ<A>) => C,
+  onRight: (b: B) => D
 ) => (p1: AsyncResultλ<A, B>): Asyncλ<C | D> => () =>
   p1 ().then (Result.λ.fold (onLeft, onRight));
 
@@ -88,7 +88,7 @@ const mapFailure = <A, B, C>(
  */
 const bindTo = <Property extends string, Previous, A, B>(
   p1: Exclude<Property, keyof Previous>,
-  p2: (a: Previous) => AsyncResultλ<A, B>
+  p2: <Param extends Previous>(a: Param) => AsyncResultλ<A, B>
 ) => <C>(
   p3: AsyncResultλ<C, Previous>
 ): AsyncResultλ<
@@ -114,7 +114,7 @@ const bindTo = <Property extends string, Previous, A, B>(
  */
 const bindToStrict = <Property extends string, Previous, A, B>(
   p1: Exclude<Property, keyof Previous>,
-  p2: (a: Previous) => AsyncResultλ<A, B>
+  p2: <Param extends Previous>(a: Param) => AsyncResultλ<A, B>
 ) => (
   p3: AsyncResultλ<A, Previous>
 ): AsyncResultλ<

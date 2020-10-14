@@ -22,10 +22,10 @@ const isJust = <A>(p1: Maybeλ<A>): p1 is Justλ<A> => p1.λ.id === 'Just';
 
 /**
  * TODO: Add Comment
- * @param p1 
+ * @param p1
  */
-const fromNullable = <A>(a: A): Maybeλ<NonNullable<A>> => a == null ? Nothing : Just (a as NonNullable<A>)
-
+const fromNullable = <A>(a: A): Maybeλ<NonNullable<A>> =>
+  a == null ? Nothing : Just (a as NonNullable<A>);
 
 const fromMaybe = <A>(p1: A) => (p2: Maybeλ<A>): A =>
   isNothing (p2) ? p1 : p2.λ.value;
@@ -35,7 +35,7 @@ const fromMaybe = <A>(p1: A) => (p2: Maybeλ<A>): A =>
  */
 const bindTo = <Property extends string, Previous, A>(
   p1: Exclude<Property, keyof Previous>,
-  p2: (a: Previous) => Maybeλ<A>
+  p2: <Param extends Previous>(a: Param) => Maybeλ<A>
 ) => (
   p3: Maybeλ<Previous>
 ): Maybeλ<

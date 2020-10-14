@@ -62,7 +62,7 @@ const foldStrict = <A, B, C>(
  */
 const bindTo = <Property extends string, Previous, A, B>(
   p1: Exclude<Property, keyof Previous>,
-  p2: (a: Previous) => Resultλ<A, B>
+  p2: <Param extends Previous>(a: Param) => Resultλ<A, B>
 ) => <C>(
   p3: Resultλ<C, Previous>
 ): Resultλ<
@@ -88,7 +88,7 @@ const bindTo = <Property extends string, Previous, A, B>(
  */
 const bindToStrict = <Property extends string, Previous, A, B>(
   p1: Exclude<Property, keyof Previous>,
-  p2: (a: Previous) => Resultλ<A, B>
+  p2: <Param extends Previous>(a: Param) => Resultλ<A, B>
 ) => (
   p3: Resultλ<A, Previous>
 ): Resultλ<
