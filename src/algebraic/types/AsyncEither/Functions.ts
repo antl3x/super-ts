@@ -24,6 +24,8 @@ export {
   bindTo,
   bindToStrict,
   bindOf,
+  chainFirst,
+  chainFirstStrict,
 };
 
 /**
@@ -129,3 +131,26 @@ const bindOf = <Property extends string, Value, A>(p1: Property) => (
   p2: AsyncEitherλ<A, Value>
 ): AsyncEitherλ<A, { [K in Property]: Value }> =>
   mapU ((a) => cBindOf (p1, a), p2);
+
+/**
+ * TODO: Add comment
+ */
+const chainFirst = <A, B, C>(p1: (b: B) => AsyncEitherλ<A, C>) => <D>(
+  p2: AsyncEitherλ<D, B>
+) =>
+  pipe (
+    p2,
+    chain ((b) =>
+      pipe (
+        p1 (b),
+        map (() => b)
+      )
+    )
+  );
+
+/**
+ * TODO: Add comment
+ */
+const chainFirstStrict: <A, B, C>(
+  p1: (b: B) => AsyncEitherλ<A, C>
+) => (p2: AsyncEitherλ<A, B>) => AsyncEitherλ<A, B> = chainFirst;
