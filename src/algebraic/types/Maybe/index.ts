@@ -5,7 +5,7 @@ import { Just, Nothing, of } from './Applicative';
 import { ap } from './Apply';
 import { map, mapU } from './Functor';
 import { Maybe$λ } from './Maybe';
-import { fromNullable, bindTo, bindOf } from './Functions';
+import { fromNullable, bindTo, bindOf, chainFirst } from './Functions';
 import { ChainOf1 } from '@algebraic/defs/Chain';
 import { chain, chainU } from './Chain';
 
@@ -19,6 +19,7 @@ type MaybeModule = ApplicativeOf1<Maybe$λ> &
       fromNullable: typeof fromNullable;
       bindTo: typeof bindTo;
       bindOf: typeof bindOf;
+      chainFirst: typeof chainFirst;
     };
   };
 
@@ -33,12 +34,13 @@ const MaybeModule: MaybeModule = {
     bindOf,
     Just,
     Nothing,
-    fromNullable
+    fromNullable,
+    chainFirst,
   },
   λU: {
     kind: Maybe$λ,
     map: mapU,
-    chain: chainU
+    chain: chainU,
   },
 };
 
