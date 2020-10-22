@@ -20,6 +20,8 @@ export {
   bindTo,
   bindToStrict,
   bindOf,
+  chainFirst,
+  chainFirstStrict,
 };
 
 /**
@@ -126,3 +128,26 @@ const bindOf = <Property extends string, Value, A>(p1: Property) => (
     p2,
     map ((a) => cBindOf (p1, a))
   );
+
+/**
+ * TODO: Add comment
+ */
+const chainFirst = <A, B, C>(p1: (b: B) => Eitherλ<A, C>) => <D>(
+  p2: Eitherλ<D, B>
+) =>
+  pipe (
+    p2,
+    chain ((b) =>
+      pipe (
+        p1 (b),
+        map (() => b)
+      )
+    )
+  );
+
+/**
+ * TODO: Add comment
+ */
+const chainFirstStrict: <A, B, C>(
+  p1: (b: B) => Eitherλ<A, C>
+) => (p2: Eitherλ<A, B>) => Eitherλ<A, B> = chainFirst;
