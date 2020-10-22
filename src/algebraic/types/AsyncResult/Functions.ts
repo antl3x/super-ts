@@ -20,6 +20,8 @@ export {
   fold,
   foldStrict,
   tryCatch,
+  chainFirst,
+  chainFirstStrict,
   mapFailure,
   bindTo,
   bindToStrict,
@@ -133,3 +135,26 @@ const bindOf = <Property extends string, Value, A>(p1: Property) => (
   p2: AsyncResultλ<A, Value>
 ): AsyncResultλ<A, { [K in Property]: Value }> =>
   mapU ((a) => cBindOf (p1, a), p2);
+
+/**
+ * TODO: Add comment
+ */
+const chainFirst = <A, B, C>(p1: (b: B) => AsyncResultλ<A, C>) => <D>(
+  p2: AsyncResultλ<D, B>
+) =>
+  pipe (
+    p2,
+    chain ((b) =>
+      pipe (
+        p1 (b),
+        map (() => b)
+      )
+    )
+  );
+
+/**
+ * TODO: Add comment
+ */
+const chainFirstStrict: <A, B, C>(
+  p1: (b: B) => AsyncResultλ<A, C>
+) => (p2: AsyncResultλ<A, B>) => AsyncResultλ<A, B> = chainFirst;

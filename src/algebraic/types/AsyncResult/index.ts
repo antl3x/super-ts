@@ -14,6 +14,8 @@ import {
   bindOf,
   fromEither,
   foldStrict,
+  chainFirst,
+  chainFirstStrict,
 } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
@@ -32,6 +34,8 @@ type AsyncResultModule = {
     mapFailure: typeof mapFailure;
     chainStrict: typeof chainStrict;
     chain: typeof chain;
+    chainFirst: typeof chainFirst;
+    chainFirstStrict: typeof chainFirstStrict;
     bindTo: typeof bindTo;
     bindToStrict: typeof bindToStrict;
     bindOf: typeof bindOf;
@@ -55,6 +59,8 @@ const AsyncResultModule: AsyncResultModule = {
     foldStrict,
     tryCatch,
     chain,
+    chainFirst,
+    chainFirstStrict,
     mapFailure,
     chainStrict,
     bindTo,
