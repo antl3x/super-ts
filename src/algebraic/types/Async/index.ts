@@ -7,7 +7,7 @@ import { map, mapU } from './Functor';
 import { Async$λ } from './Async';
 import { ChainOf1 } from '@algebraic/defs/Chain';
 import { chain, chainU } from './Chain';
-import { bindTo, bindOf } from './Functions';
+import { bindTo, bindOf, chainFirst } from './Functions';
 
 type AsyncModule = ApplicativeOf1<Async$λ> &
   FunctorOf1<Async$λ> &
@@ -16,8 +16,9 @@ type AsyncModule = ApplicativeOf1<Async$λ> &
     λ: {
       bindTo: typeof bindTo;
       bindOf: typeof bindOf;
+      chainFirst: typeof chainFirst;
     };
-  }
+  };
 
 const AsyncModule: AsyncModule = {
   λ: {
@@ -25,14 +26,15 @@ const AsyncModule: AsyncModule = {
     ap,
     of,
     map,
+    chainFirst,
     bindTo,
     bindOf,
-    chain
+    chain,
   },
   λU: {
     kind: Async$λ,
     map: mapU,
-    chain: chainU
+    chain: chainU,
   },
 };
 
