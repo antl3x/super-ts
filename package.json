@@ -1,6 +1,6 @@
 {
   "name": "super-ts",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Typescript functional programming library inspired by Haskell and PureScript providing both runtime type checking and functional algebraic data types.",
   "main": "cjs/index.js",
   "module": "esm/index.mjs",
