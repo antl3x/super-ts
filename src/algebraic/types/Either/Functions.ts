@@ -151,3 +151,17 @@ const chainFirst = <A, B, C>(p1: (b: B) => Eitherλ<A, C>) => <D>(
 const chainFirstStrict: <A, B, C>(
   p1: (b: B) => Eitherλ<A, C>
 ) => (p2: Eitherλ<A, B>) => Eitherλ<A, B> = chainFirst;
+
+/**
+ * TODO: Add comment
+ */
+export const getOrElse = <A, B>(onLeft: (a: A) => B) => <C>(
+  p2: Eitherλ<A, C>
+): C | B => (isLeft (p2) ? onLeft (p2.λ.value) : p2.λ.value);
+
+/**
+ * TODO: Add comment
+ */
+export const getOrElseStrict: <A, B>(
+  onLeft: (a: A) => B
+) => (p2: Eitherλ<A, B>) => B = getOrElse;

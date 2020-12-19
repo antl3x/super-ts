@@ -135,3 +135,17 @@ const chainFirst = <A, B, C>(p1: (b: B) => Resultλ<A, C>) => <D>(
 const chainFirstStrict: <A, B, C>(
   p1: (b: B) => Resultλ<A, C>
 ) => (p2: Resultλ<A, B>) => Resultλ<A, B> = chainFirst;
+
+/**
+ * TODO: Add comment
+ */
+export const getOrElse = <A, B>(onFailure: (a: NonEmptyArrayλ<A>) => B) => <C>(
+  p2: Resultλ<A, C>
+): C | B => (isFailure (p2) ? onFailure (p2.λ.value) : p2.λ.value);
+
+/**
+ * TODO: Add comment
+ */
+export const getOrElseStrict: <A, B>(
+  onFailure: (a: NonEmptyArrayλ<A>) => B
+) => (p2: Resultλ<A, B>) => B = getOrElse;

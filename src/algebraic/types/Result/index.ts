@@ -16,6 +16,8 @@ import {
   bindOf,
   chainFirst,
   chainFirstStrict,
+  getOrElse,
+  getOrElseStrict,
 } from './Functions';
 
 type ResultModule = ApplicativeOf2<Result$λ> &
@@ -35,6 +37,8 @@ type ResultModule = ApplicativeOf2<Result$λ> &
       isSuccess: typeof isSuccess;
       chainFirst: typeof chainFirst;
       chainFirstStrict: typeof chainFirstStrict;
+      getOrElse: typeof getOrElse;
+      getOrElseStrict: typeof getOrElseStrict;
     };
     λU: {
       chainStrict: typeof chainStrictU;
@@ -60,6 +64,8 @@ const ResultModule: ResultModule = {
     mapFailure,
     of,
     Success,
+    getOrElse,
+    getOrElseStrict
   },
   λU: {
     kind: Result$λ,

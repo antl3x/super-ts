@@ -13,6 +13,7 @@ import { bindTo as cBindTo } from '@algebraic/common/bindTo';
 import { bindOf as cBindOf } from '@algebraic/common/bindOf';
 import { Eitherλ } from '../Either/Either';
 import { isLeft } from '../Either/Functions';
+import ResultModule from '../Result';
 
 export {
   fromResult,
@@ -158,3 +159,19 @@ const chainFirst = <A, B, C>(p1: (b: B) => AsyncResultλ<A, C>) => <D>(
 const chainFirstStrict: <A, B, C>(
   p1: (b: B) => AsyncResultλ<A, C>
 ) => (p2: AsyncResultλ<A, B>) => AsyncResultλ<A, B> = chainFirst;
+
+/**
+ * TODO: Add comment
+ */
+export const getOrElse = <A, B>(onFailure: (a: NonEmptyArrayλ<A>) => Asyncλ<B>) => <C>(p2: AsyncResultλ<A, C>): Asyncλ<C | B> =>
+  pipe (
+    p2,
+    AsyncModule.λ.chain (
+      ResultModule.λ.fold<A, C, Asyncλ<C | B>,  Asyncλ<C | B>> (onFailure, AsyncModule.λ.of)
+      )
+    )
+
+/**
+ * TODO: Add comment
+ */
+export const getOrElseStrict: <A, B>(onFailure: (a: NonEmptyArrayλ<A>) => Asyncλ<B>) => (p2: AsyncResultλ<A, B>) => Asyncλ<B> = getOrElse
