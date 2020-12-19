@@ -16,10 +16,12 @@ import {
   foldStrict,
   chainFirst,
   chainFirstStrict,
+  getOrElse, 
+  getOrElseStrict,
+  mapFailure
 } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
-import { mapFailure } from './Functions';
 
 type AsyncResultModule = {
   λ: {
@@ -39,6 +41,8 @@ type AsyncResultModule = {
     bindTo: typeof bindTo;
     bindToStrict: typeof bindToStrict;
     bindOf: typeof bindOf;
+    getOrElse: typeof getOrElse;
+    getOrElseStrict: typeof getOrElseStrict;
   };
 } & ApplicativeOf2<AsyncResult$λ> &
   FunctorOf2<AsyncResult$λ> &
@@ -66,6 +70,8 @@ const AsyncResultModule: AsyncResultModule = {
     bindTo,
     bindToStrict,
     bindOf,
+    getOrElse,
+    getOrElseStrict
   },
   λU: {
     kind: AsyncResult$λ,
