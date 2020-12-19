@@ -149,3 +149,8 @@ export const getOrElse = <A, B>(onFailure: (a: NonEmptyArrayλ<A>) => B) => <C>(
 export const getOrElseStrict: <A, B>(
   onFailure: (a: NonEmptyArrayλ<A>) => B
 ) => (p2: Resultλ<A, B>) => B = getOrElse;
+
+/**
+ * TODO: Add comment
+ */
+export const orElse = <A, B, C>(onFailure: (a: NonEmptyArrayλ<A>) => Resultλ<C, B>) => (p2: Resultλ<A, B>): Resultλ<C, B> => (isFailure (p2) ? onFailure (p2.λ.value) : p2)

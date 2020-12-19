@@ -18,7 +18,8 @@ import {
   chainFirstStrict,
   getOrElse, 
   getOrElseStrict,
-  mapFailure
+  mapFailure,
+  orElse
 } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
@@ -43,6 +44,8 @@ type AsyncResultModule = {
     bindOf: typeof bindOf;
     getOrElse: typeof getOrElse;
     getOrElseStrict: typeof getOrElseStrict;
+    orElse: typeof orElse;
+
   };
 } & ApplicativeOf2<AsyncResult$λ> &
   FunctorOf2<AsyncResult$λ> &
@@ -71,7 +74,8 @@ const AsyncResultModule: AsyncResultModule = {
     bindToStrict,
     bindOf,
     getOrElse,
-    getOrElseStrict
+    getOrElseStrict,
+    orElse
   },
   λU: {
     kind: AsyncResult$λ,

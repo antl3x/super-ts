@@ -171,3 +171,8 @@ export const getOrElse = <A, B>(onLeft: (a: A) => Asyncλ<B>) => <C>(p2: AsyncEi
  * TODO: Add comment
  */
 export const getOrElseStrict: <A, B>(onLeft: (a: A) => Asyncλ<B>) => (p2: AsyncEitherλ<A, B>) => Asyncλ<B> = getOrElse
+
+/**
+ * TODO: Add comment
+ */
+export const orElse = <A, B, C>(onLeft: (a: A) => AsyncEitherλ<C, B>) => (p2: AsyncEitherλ<A, B>): AsyncEitherλ<C, B> => AsyncModule.λU.chain (EitherModule.λ.fold (onLeft, AsyncEitherModule.λ.Right), p2)

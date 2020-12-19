@@ -175,3 +175,8 @@ export const getOrElse = <A, B>(onFailure: (a: NonEmptyArrayλ<A>) => Asyncλ<B>
  * TODO: Add comment
  */
 export const getOrElseStrict: <A, B>(onFailure: (a: NonEmptyArrayλ<A>) => Asyncλ<B>) => (p2: AsyncResultλ<A, B>) => Asyncλ<B> = getOrElse
+
+/**
+ * TODO: Add comment
+ */
+export const orElse = <A, B, C>(onFailure: (a: NonEmptyArrayλ<A>) => AsyncResultλ<C, B>) => (p2: AsyncResultλ<A, B>): AsyncResultλ<C, B> => AsyncModule.λU.chain (ResultModule.λ.fold (onFailure, AsyncEitherModule.λ.Success), p2)

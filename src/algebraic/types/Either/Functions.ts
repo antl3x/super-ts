@@ -165,3 +165,8 @@ export const getOrElse = <A, B>(onLeft: (a: A) => B) => <C>(
 export const getOrElseStrict: <A, B>(
   onLeft: (a: A) => B
 ) => (p2: Eitherλ<A, B>) => B = getOrElse;
+
+/**
+ * TODO: Add comment
+ */
+export const orElse = <A, B, C>(onLeft: (a: A) => Eitherλ<C, B>) => (p2: Eitherλ<A, B>): Eitherλ<C, B> => (isLeft (p2) ? onLeft (p2.λ.value) : p2)

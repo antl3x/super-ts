@@ -18,6 +18,7 @@ import {
   chainFirst,
   getOrElse,
   getOrElseStrict,
+  orElse
 } from './Functions';
 import { fold } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
@@ -43,6 +44,7 @@ type AsyncEitherModule = {
     bindOf: typeof bindOf;
     getOrElse: typeof getOrElse;
     getOrElseStrict: typeof getOrElseStrict;
+    orElse: typeof orElse;
   };
 } & ApplicativeOf2<AsyncEither$λ> &
   FunctorOf2<AsyncEither$λ> &
@@ -71,7 +73,8 @@ const AsyncEitherModule: AsyncEitherModule = {
     bindToStrict,
     bindOf,
     getOrElse,
-    getOrElseStrict
+    getOrElseStrict,
+    orElse
   },
   λU: {
     kind: AsyncEither$λ,

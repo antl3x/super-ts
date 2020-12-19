@@ -18,6 +18,7 @@ import {
   chainFirstStrict,
   getOrElse,
   getOrElseStrict,
+  orElse,
 } from './Functions';
 
 type ResultModule = ApplicativeOf2<Result$λ> &
@@ -39,6 +40,7 @@ type ResultModule = ApplicativeOf2<Result$λ> &
       chainFirstStrict: typeof chainFirstStrict;
       getOrElse: typeof getOrElse;
       getOrElseStrict: typeof getOrElseStrict;
+      orElse: typeof orElse;
     };
     λU: {
       chainStrict: typeof chainStrictU;
@@ -65,7 +67,8 @@ const ResultModule: ResultModule = {
     of,
     Success,
     getOrElse,
-    getOrElseStrict
+    getOrElseStrict,
+    orElse
   },
   λU: {
     kind: Result$λ,
