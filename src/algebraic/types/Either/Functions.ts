@@ -169,4 +169,10 @@ export const getOrElseStrict: <A, B>(
 /**
  * TODO: Add comment
  */
-export const orElse = <A, B, C>(onLeft: (a: A) => Eitherλ<C, B>) => (p2: Eitherλ<A, B>): Eitherλ<C, B> => (isLeft (p2) ? onLeft (p2.λ.value) : p2)
+export const orElse = <A, B, C>(onLeft: (a: A) => Eitherλ<C, B>) => <D>(p2: Eitherλ<A, D>): Eitherλ<C, B | D> => (isLeft (p2) ? onLeft (p2.λ.value) : p2)
+
+
+/**
+ * TODO: Add comment
+ */
+export const orElseStrict: <A, B, C>(onLeft: (a: A) => Eitherλ<C, B>) => (p2: Eitherλ<A, B>) => Eitherλ<C, B> = orElse

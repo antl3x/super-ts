@@ -19,6 +19,7 @@ import {
   getOrElse,
   getOrElseStrict,
   orElse,
+  orElseStrict,
 } from './Functions';
 import { ChainOf2 } from '@algebraic/defs/Chain';
 
@@ -42,6 +43,7 @@ type EitherModule = ApplicativeOf2<Either$λ> &
       getOrElse: typeof getOrElse;
       getOrElseStrict: typeof getOrElseStrict;
       orElse: typeof orElse;
+      orElseStrict: typeof orElseStrict;
     };
     λU: {
       chainStrict: typeof chainStrictU;
@@ -69,7 +71,8 @@ const EitherModule: EitherModule = {
     chainFirstStrict,
     getOrElse,
     getOrElseStrict,
-    orElse
+    orElse,
+    orElseStrict
   },
   λU: {
     kind: Either$λ,
