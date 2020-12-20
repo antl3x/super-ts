@@ -65,7 +65,7 @@ const doChildChecksCondition = <
 ) =>
   withChecks.some ((c) => c.λ.id === 'Success')
     ? (payload as any[]).map ((v, i) =>
-        child._.checkInt (v, buildPath (i, path), (child as any)?.child)
+        child._.checkInt (v, buildPath (i, path), (child as any)?._?.child)
       )
     : [];
 
