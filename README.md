@@ -1,5 +1,10 @@
 # <span id="section:home">🦸 λΔ super-ts</span>
 
+> [!WARNING]
+> Hey there, just a heads-up: I've stopped updating this repo. If you're diving into functional programming—like monads, higher kinded types, and all that fun stuff—in TypeScript, you might find some handy insights here. But a little word of caution: it's probably not the best fit for production use. Happy coding!
+
+---
+
 [![npm version](https://img.shields.io/npm/v/super-ts.svg)](https://www.npmjs.com/package/super-ts)
 
 **super-ts** is a Typescript functional programming library inspired by [Haskell](https://www.haskell.org/) and [PureScript](http://www.purescript.org/) providing both runtime type checking and functional algebraic data types.
